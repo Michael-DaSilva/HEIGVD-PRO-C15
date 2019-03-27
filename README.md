@@ -12,7 +12,7 @@ Development team:
 | Nair Alic                             | nair.alic@heig-vd.ch                 | Naguir          |
 | Michaël da Silva (deputy project lead)| michael.dasilva@heig-vd.ch           | Michael-DaSilva |
 | Robin Fournier                        | robin.fournier@heig-vd.ch            | Dwimcore 		   |
-| Joshua Gomes da Costa (project lead)  | joshua.gomesdacosta@heig-vd.ch       |    			       |
+| Joshua Gomes da Costa (project lead)  | joshua.gomesdacosta@heig-vd.ch       | JoshuaGomesDaCosta	|
 | Vladimir Mbassi                       | vladimir.mbassi@heig-vd.ch           | Ethras          |
 | Olivier Romeo Djeulezeck Tamegui      | olivier.djeulezecktamegui@heig-vd.ch | djeule2		     |
  
