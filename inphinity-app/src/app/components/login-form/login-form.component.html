@@ -1,8 +1,9 @@
 <div class="card card-signin my-5">
   <div class="card-body">
+    <img style="width: 150px; margin-left : auto; margin-right: auto;display: block;" src="assets/images/inphinity-logo-tmp.png" alt="">
     <h5 class="card-title text-center">Authentification</h5>
     <div *ngIf="userField.touched && userField.errors">
-        <div class="alert alert-danger" *ngIf="userField.errors.required"> The company name is required </div>
+        <div class="alert alert-danger" *ngIf="userField.errors.required"> The username is required </div>
     </div>
 
     <form #loginForm="ngForm" class="form-signin" (ngSubmit)="submitLogin(loginForm.form);">
