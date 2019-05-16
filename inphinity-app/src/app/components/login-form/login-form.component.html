@@ -2,24 +2,27 @@
   <div class="card-body">
     <img style="width: 150px; margin-left : auto; margin-right: auto;display: block;" src="assets/images/inphinity-logo-tmp.png" alt="">
     <h5 class="card-title text-center">Authentification</h5>
+    <div *ngIf="this.msgToShow">
+        <div class="alert alert-danger"> {{this.msgToShow}} </div>
+    </div>
     <div *ngIf="userField.touched && userField.errors">
-        <div class="alert alert-danger" *ngIf="userField.errors.required"> The username is required </div>
+        <div class="alert alert-danger" *ngIf="userField.errors.required"> Le nom d'utilisateur est requis! </div>
     </div>
 
     <form #loginForm="ngForm" class="form-signin" (ngSubmit)="submitLogin(loginForm.form);">
       <div class="form-label-group">
-        <input type="text" id="inputUsername" class="form-control" placeholder="Username" required autofocus name="username" ngModel #userField="ngModel">
-        <label for="inputUsername">Username</label>
+        <input type="text" id="inputUsername" class="form-control" placeholder="Utilisateur" required autofocus name="username" ngModel #userField="ngModel">
+        <label for="inputUsername">Utilisateur</label>
       </div>
 
       <div class="form-label-group">
-        <input type="password" id="inputPassword" class="form-control" placeholder="Password" required name="password" ngModel #pwdField="ngModel">
-        <label for="inputPassword">Password</label>
+        <input type="password" id="inputPassword" class="form-control" placeholder="Mot de passe" required name="password" ngModel #pwdField="ngModel">
+        <label for="inputPassword">Mot de passe</label>
       </div>
 
       <div class="custom-control custom-checkbox mb-3">
         <input type="checkbox" class="custom-control-input" id="customCheck1">
-        <label class="custom-control-label" for="customCheck1">Remember password</label>
+        <label class="custom-control-label" for="customCheck1">Se rappeler du mot de passe</label>
       </div>
       <button class="btn btn-lg btn-primary btn-block text-uppercase" [disabled]="!loginForm.valid" >Se connecter</button>
       <hr class="my-4">

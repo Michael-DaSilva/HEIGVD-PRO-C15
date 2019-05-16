@@ -26,7 +26,7 @@ export class AuthService {
       return localStorage.getItem('token');
     }
 
-    signIn(userAccesses) {
+    signIn(userAccesses, caller) {
       return new Promise(
         (resolve, reject) => {
           setTimeout(
@@ -40,19 +40,23 @@ export class AuthService {
               formData.append("password", userAccesses.password)
 
               this.http
-                  .post<any>("http://trex.lan.iict.ch:8080/api/login", formData, {
-                    headers: new HttpHeaders({
-                      'Content-Type': 'multipart/form-data',
-                      'Cache-Control': 'no-cache',
-                      'Access-Control-Allow-Origin': '*'
-                    })
-                  })
-                  .subscribe(
-                    (response) => {
-                      console.log(response);
-                    }
-                  );
-              resolve(true);
+              .post<any>("http://trex.lan.iict.ch:8080/api/login", formData, {
+                headers: new HttpHeaders({
+                  'Content-Type': 'multipart/form-data',
+                  'Cache-Control': 'no-cache',
+                  'Access-Control-Allow-Origin': '*'
+                })
+              })
+              .toPromise()
+              .then(
+                res => {
+                  console.log(res.json().results);
+                  resolve();
+                },
+                msg => {
+                  reject(msg.statusText);
+                }
+              );
             }, 100
           );
         }

@@ -8,6 +8,7 @@ import { Component, OnInit, Output, EventEmitter   } from '@angular/core';
 export class LoginFormComponent implements OnInit {
 
   constructor() { }
+  msgToShow : string;
 
   ngOnInit() {
   }
@@ -16,6 +17,10 @@ export class LoginFormComponent implements OnInit {
     console.log(form.value);
     this.submitComplete(form)
     form.reset();
+  }
+
+  showMessage(signal : any){
+    this.msgToShow = signal;
   }
 
   @Output()
