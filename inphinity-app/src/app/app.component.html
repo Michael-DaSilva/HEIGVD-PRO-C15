@@ -18,8 +18,8 @@
   </li>
 </ul> -->
 
-<div id="header" *ngIf="this.authService.isAuth()" >
-    <app-header-menu></app-header-menu>
+<div id="header" *ngIf="this.isAuthed" >
+    <app-header-menu [username]='uname'></app-header-menu>
 </div>
 <div id="main-content">
     <router-outlet></router-outlet>

@@ -14,7 +14,6 @@ export class LoginFormComponent implements OnInit {
   }
 
   submitLogin(form){
-    console.log(form.value);
     this.submitComplete(form)
     form.reset();
   }

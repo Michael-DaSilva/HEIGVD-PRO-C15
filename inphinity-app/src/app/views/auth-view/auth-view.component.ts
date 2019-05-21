@@ -14,10 +14,18 @@ export class AuthViewComponent implements OnInit {
   @ViewChild(LoginFormComponent)  loginForm:LoginFormComponent;
   authStatus: boolean;
 
-  ngOnInit() { 
+  ngOnInit() {}
+  ngAfterContentChecked(){
     // We redirect to / if the user is authenticated
-    if(this.authService.isAuth())
-            this.router.navigate(['']);
+    if(this.authService.isAuth()){
+      if(this.router.url === '/log-out'){
+        this.authService.signOut();
+        this.router.navigate(['login']);
+      } else {
+        this.router.navigate(['']);
+      }
+    }
+            
   }
 
   sendErrorMsg(msg : string){
@@ -25,7 +33,6 @@ export class AuthViewComponent implements OnInit {
   }
 
   doSignIn(event) {
-    console.log(event);
     this.authService.signIn(event, this).catch(e => {this.sendErrorMsg(e);})
         .then( res => {
           if(typeof(res) !== 'undefined' ){

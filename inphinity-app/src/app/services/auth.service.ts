@@ -12,11 +12,20 @@ export class AuthService {
     }
 
     isAuth() {
-        return (localStorage.getItem('auth') == "true" && localStorage.getItem('token') !== null && localStorage.getItem('token') !== "") && (localStorage.getItem('token') !== 'undefined');
+        var bAuth, bToken, bUname : Boolean;
+        bAuth = this.getAuth() == "true";
+        bToken = this.getToken()     !== null && this.getToken()     !== "" && this.getToken()    !== 'undefined';
+        bUname = this.getUsername()  !== null && this.getUsername()  !== "" && this.getUsername() !== 'undefined';
+
+        return ( bAuth && bToken && bUname);
     }
 
     setAuth(a : boolean){
         localStorage.setItem("auth", a.toString());
+    }
+
+    getAuth(){
+      return localStorage.getItem("auth");
     }
 
     setToken(token){
@@ -25,6 +34,14 @@ export class AuthService {
 
     getToken() : string{
       return localStorage.getItem('token');
+    }
+
+    storeUsername(un){
+      localStorage.setItem("uname", un);
+    }
+
+    getUsername(){
+      return localStorage.getItem("uname");
     }
 
     /**
@@ -60,6 +77,7 @@ export class AuthService {
                     reject(res.error);
                   } else {
                     //returning the token
+                    this.storeUsername(userAccesses.username)
                     return resolve(res.token);
                   }
                 },
@@ -83,5 +101,6 @@ export class AuthService {
     signOut() {
       this.setAuth(false);
       this.setToken('');
+      this.storeUsername('');
     }
 }

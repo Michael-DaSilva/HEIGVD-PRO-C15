@@ -9,14 +9,22 @@ import { Router } from '@angular/router';
 })
 export class AppComponent implements OnInit{
   title = 'inphinity-app';
+  uname;
+  isAuthed : Boolean;
 
   constructor(private authService: AuthService, private router: Router){}
   
-  ngOnInit(){
+  ngAfterContentChecked(){
+    this.isAuthed = this.authService.isAuth();
     if(!this.authService.isAuth() && window.location.pathname !== '/login'){
       console.log("Not auth -> redirecting to login.");
       this.router.navigate(['login']);
+    } else {
+      this.uname = this.authService.getUsername();
     }
+  }
+
+  ngOnInit(){
 
   }
 }
