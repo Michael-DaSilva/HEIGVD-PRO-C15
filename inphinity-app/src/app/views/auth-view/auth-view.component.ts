@@ -14,7 +14,11 @@ export class AuthViewComponent implements OnInit {
   @ViewChild(LoginFormComponent)  loginForm:LoginFormComponent;
   authStatus: boolean;
 
-  ngOnInit() { }
+  ngOnInit() { 
+    // We redirect to / if the user is authenticated
+    if(this.authService.isAuth())
+            this.router.navigate(['']);
+  }
 
   sendErrorMsg(msg : string){
     this.loginForm.showMessage("Erreur de connexion : " + msg);
@@ -22,9 +26,17 @@ export class AuthViewComponent implements OnInit {
 
   doSignIn(event) {
     console.log(event);
-    this.authService.signIn(event, this).catch(e => {this.sendErrorMsg(e);});
-    
-    if(this.authService.isAuth())
-      this.router.navigate(['']);
+    this.authService.signIn(event, this).catch(e => {this.sendErrorMsg(e);})
+        .then( res => {
+          if(typeof(res) !== 'undefined' ){
+            //successful login
+            this.authService.setAuth(true);
+            this.authService.setToken(res);
+          }
+
+          // We redirect to / if the user is authenticated
+          if(this.authService.isAuth())
+            this.router.navigate(['']);
+        });
   }
 }
