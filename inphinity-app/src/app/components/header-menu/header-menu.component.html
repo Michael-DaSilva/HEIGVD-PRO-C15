@@ -20,5 +20,15 @@
         <a class="nav-link disabled" routerLink="" >Bacteriophage</a>
       </li>
     </ul>
+    <ul class="navbar-nav ">
+      <li class="nav-item dropdown">
+        <a class="nav-link dropdown-toggle" href="#" id="dropdown-login-navbar" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+          {{username}}
+        </a>
+        <div class="dropdown-menu" aria-labelledby="dropdown-login-navbar" style="right: 0;left: unset;">
+          <a class="dropdown-item" routerLink="log-out">Se déconnecter</a>
+        </div>
+      </li>
+    </ul>
   </div>
 </nav>

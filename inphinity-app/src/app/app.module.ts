@@ -14,6 +14,7 @@ import { HttpClientModule } from '@angular/common/http';
 
 const appRoutes: Routes = [
   { path: 'login', component: AuthViewComponent },
+  { path: 'log-out', component: AuthViewComponent},
   { path: '', component: GeneralViewComponent }
 ];
 
