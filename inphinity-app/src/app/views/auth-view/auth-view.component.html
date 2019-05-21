@@ -1,0 +1,12 @@
+   <!-- 
+  <h2>Authentification</h2>
+  <button class="btn btn-success" *ngIf="!this.authService.isAuth()" (click)="onSignIn()">Se connecter</button>
+  <button class="btn btn-danger" *ngIf="this.authService.isAuth()" (click)="onSignOut()">Se déconnecter</button>  -->
+
+  <div class="container">
+    <div class="row">
+      <div class="col-sm-9 col-md-7 col-lg-5 mx-auto">
+          <app-login-form (formResponse)="doSignIn($event)"></app-login-form>
+      </div>
+    </div>
+  </div>
