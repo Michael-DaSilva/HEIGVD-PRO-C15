@@ -1,6 +1,6 @@
 import { BrowserModule } from '@angular/platform-browser';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { NgModule } from '@angular/core';
-
 import { AppComponent } from './app.component';
 import { HeaderMenuComponent } from './components/header-menu/header-menu.component';
 import {AuthService} from './services/auth.service';
@@ -11,10 +11,19 @@ import { RouterModule } from '@angular/router';
 import { LoginFormComponent } from './components/login-form/login-form.component';
 import { FormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
+import { CouplesViewComponent } from './views/couples-view/couples-view.component';
+import { BacteriumViewComponent } from './views/bacterium-view/bacterium-view.component';
+import { BacteriopphageViewComponent } from './views/bacteriopphage-view/bacteriopphage-view.component';
+import { PieChartComponent } from './components/pie-chart/pie-chart.component';
+import { NgxGraphModule } from '@swimlane/ngx-graph';
+import { NgxChartsModule } from '@swimlane/ngx-charts';
 
 const appRoutes: Routes = [
   { path: 'login', component: AuthViewComponent },
   { path: 'log-out', component: AuthViewComponent},
+  { path: 'couples', component: CouplesViewComponent},
+  { path: 'bacterium', component : BacteriumViewComponent},
+  { path: 'bacteriophage', component : BacteriopphageViewComponent},
   { path: '', component: GeneralViewComponent }
 ];
 
@@ -24,13 +33,20 @@ const appRoutes: Routes = [
     HeaderMenuComponent,
     AuthViewComponent,
     GeneralViewComponent,
-    LoginFormComponent
+    LoginFormComponent,
+    CouplesViewComponent,
+    BacteriumViewComponent,
+    BacteriopphageViewComponent,
+    PieChartComponent
   ],
   imports: [
     BrowserModule,
+    BrowserAnimationsModule,
     RouterModule.forRoot(appRoutes),
     FormsModule,
-    HttpClientModule
+    HttpClientModule,
+    NgxChartsModule,
+    NgxGraphModule
   ],
   providers: [
     AuthService

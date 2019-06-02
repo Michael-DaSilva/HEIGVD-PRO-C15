@@ -28,7 +28,8 @@
             ],
             "styles": [
               "src/styles.scss",
-              "node_modules/bootstrap/dist/css/bootstrap.css"
+              "node_modules/bootstrap/dist/css/bootstrap.css",
+              "node_modules/@swimlane/ngx-charts/release/index.css"
             ],
             "scripts": [
               "node_modules/jquery/dist/jquery.min.js",
