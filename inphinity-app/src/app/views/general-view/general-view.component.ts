@@ -21,7 +21,7 @@ export class GeneralViewComponent implements OnInit {
     this.fetchFamilyDatas();
     this.fetchInteractionsData();
   }
-  
+
 
   fetchInteractionsData(){
     let coupleRes = this.api.getDatas('/couple/', this.authService.getToken());
@@ -30,17 +30,11 @@ export class GeneralViewComponent implements OnInit {
     let couplesList : Couple[], interactionsTypes : Interaction[];
 
     if(typeof(coupleRes) !== 'undefined' && typeof(interactionsRes) !== 'undefined'){
-      coupleRes.subscribe( 
+      coupleRes.subscribe(
         res     =>{couplesList = res as Couple[]},
         error   =>{console.log("Error getting couples");console.log(error)},
         ()      => {
-          interactionsRes.subscribe( 
-            res     =>{interactionsTypes = res as Interaction[]},
-            error   =>{console.log("Error getting interactions" + error);},
-            ()      => {
-              console.log("Calculating interactions");
-              this.interChart.updateGraphDatas(this.IntercationsToGraphData(couplesList, interactionsTypes));
-            });
+          this.interChart.updateGraphDatas(this.IntercationsToGraphData(couplesList));
         });
     }
 
@@ -49,29 +43,37 @@ export class GeneralViewComponent implements OnInit {
   private fetchFamilyDatas(){
     let res = this.api.getDatas('/family/', this.authService.getToken());
     let array : Array<Family>;
-    
+
     if(typeof(res) !== 'undefined' ){
-      res.subscribe( 
+      res.subscribe(
         res     =>{array = res as any[]},
         error   =>{console.log("Error getting values" + error);},
         ()      => {this.famChart.updateGraphDatas(this.FamiliesToGraphData(array));}
-        );
+      );
     }
   }
 
-  private IntercationsToGraphData(couples : Array<Couple>, possibleInteractions : Interaction[]) : any[]{
+  private IntercationsToGraphData(couples : Array<Couple>) : any[]{
     var result = new Array<any>();
-    for(var _i = 0; _i < possibleInteractions.length; _i++){
-      result.push(
-            {
-              "name" : possibleInteractions[_i].designation,
-              "value" : 0
-            })
+    let positive = 0;
+    let negative = 0;
+
+    for (var _i = 0; _i < couples.length; _i++){
+      if(couples[_i].interaction_type){
+        positive++;
+      } else {
+        negative++;
+      }
     }
 
-    for(var _i = 0; _i < couples.length; _i++){
-        (result[couples[_i].level]).value += 1;
-    }
+    result.push({
+      name: 'positive',
+      value: positive
+    });
+    result.push({
+      name: 'negative',
+      value: negative
+    });
 
     return result;
   }
@@ -79,11 +81,39 @@ export class GeneralViewComponent implements OnInit {
     var result = new Array<any>();
     for(var _i = 0; _i < datas.length; _i++){
       result.push(
-            {
-              "name" : datas[_i].designation,
-              "value" : datas[_i].genuses.length
-            })
+        {
+          name : datas[_i].designation,
+          value : datas[_i].genuses.length
+        });
     }
+
+    result.sort(function (a, b) {
+      return a.value - b.value;
+    }).reverse();
+
+    result = this.RegroupFamilies(result);
     return result;
+  }
+
+  private RegroupFamilies(datas : Array<any>) : any[]{
+    let others = 0;
+    let result = [];
+    if(datas.length > 4){
+      result.push(datas[0]);
+      result.push(datas[1]);
+      result.push(datas[2]);
+
+      for(let _i = 3; _i < datas.length - 1; _i++){
+        others += datas[_i].value;
+      }
+      result.push({
+        name: 'Others',
+        value: others
+      });
+      return result;
+    } else {
+      return datas;
+    }
+
   }
 }
