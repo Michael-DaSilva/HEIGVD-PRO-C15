@@ -14,7 +14,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { CouplesViewComponent } from './views/couples-view/couples-view.component';
 import { BacteriumViewComponent } from './views/bacterium-view/bacterium-view.component';
 import { BacteriopphageViewComponent } from './views/bacteriopphage-view/bacteriopphage-view.component';
-import { PieChartComponent } from './components/pie-chart/pie-chart.component';
+import { InphPieChartComponent } from './components/pie-chart/pie-chart.component';
 import { NgxGraphModule } from '@swimlane/ngx-graph';
 import { NgxChartsModule } from '@swimlane/ngx-charts';
 
@@ -37,7 +37,7 @@ const appRoutes: Routes = [
     CouplesViewComponent,
     BacteriumViewComponent,
     BacteriopphageViewComponent,
-    PieChartComponent
+    InphPieChartComponent
   ],
   imports: [
     BrowserModule,
