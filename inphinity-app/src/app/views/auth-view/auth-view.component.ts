@@ -1,7 +1,7 @@
-import { Component, OnInit, ViewChild  } from '@angular/core';
-import {AuthService} from '../../services/auth.service'
-import { Router } from '@angular/router';
-import { LoginFormComponent } from 'src/app/components/login-form/login-form.component';
+import {Component, OnInit, ViewChild} from '@angular/core';
+import {AuthService} from '../../services/auth.service';
+import {Router} from '@angular/router';
+import {LoginFormComponent} from 'src/app/components/login-form/login-form.component';
 
 @Component({
   selector: 'app-auth-view',
@@ -10,40 +10,33 @@ import { LoginFormComponent } from 'src/app/components/login-form/login-form.com
 })
 export class AuthViewComponent implements OnInit {
 
-  constructor(private authService: AuthService, private router: Router) { }
-  @ViewChild(LoginFormComponent)  loginForm:LoginFormComponent;
-  authStatus: boolean;
-
-  ngOnInit() {}
-  ngAfterContentChecked(){
-    // We redirect to / if the user is authenticated
-    if(this.authService.isAuth()){
-      if(this.router.url === '/log-out'){
-        this.authService.signOut();
-        this.router.navigate(['login']);
-      } else {
-        this.router.navigate(['']);
-      }
-    }
-            
+  constructor(private authService: AuthService, private router: Router) {
   }
 
-  sendErrorMsg(msg : string){
-    this.loginForm.showMessage("Erreur de connexion : " + msg);
+  @ViewChild(LoginFormComponent) loginForm: LoginFormComponent;
+
+  ngOnInit() {
+  }
+
+  sendErrorMsg(msg: string) {
+    this.loginForm.showMessage('Erreur de connexion : ' + msg);
   }
 
   doSignIn(event) {
-    this.authService.signIn(event, this).catch(e => {this.sendErrorMsg(e);})
-        .then( res => {
-          if(typeof(res) !== 'undefined' ){
-            //successful login
-            this.authService.setAuth(true);
-            this.authService.setToken(res);
-          }
+    this.authService.signIn(event, this).catch(e => {
+      this.sendErrorMsg(e);
+    })
+      .then(res => {
+        if (typeof (res) !== 'undefined') {
+          //successful login
+          this.authService.setAuth(true);
+          this.authService.setToken(res);
+        }
 
-          // We redirect to / if the user is authenticated
-          if(this.authService.isAuth())
-            this.router.navigate(['']);
-        });
+        // We redirect to / if the user is authenticated
+        if (this.authService.isAuth()) {
+          this.router.navigate(['']);
+        }
+      });
   }
 }
