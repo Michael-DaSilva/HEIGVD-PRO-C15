@@ -155,11 +155,6 @@ export class GeneralViewComponent implements OnInit {
     this.DNAContigChart.updateGraphDatas(data, '', 'Frequency');
   }
 
-  fetchInteractionsData(){
-    let coupleRes = this.api.getDatas('/couple/', this.authService.getToken());
-    let interactionsRes = this.api.getDatas('/intervalidity/', this.authService.getToken());
->>>>>>> master
-
   /**
    * author : R. Fournier
    * updated: M. Da Silva, 04.06.2019
