@@ -1,7 +1,5 @@
-import { Component, OnInit, Input, ChangeDetectionStrategy, OnChanges, ViewChild  } from '@angular/core';
-import {NgxChartsModule, PieChartComponent} from '@swimlane/ngx-charts';
-import * as shape from 'd3-shape';
-import {single, multi} from './data';
+import { Component, OnInit, Input,ChangeDetectionStrategy, OnChanges, ViewChild  } from '@angular/core';
+import {NgxChartsModule, PieChartComponent} from "@swimlane/ngx-charts";
 
 @Component({
   selector: 'app-pie-chart',
@@ -22,7 +20,7 @@ import {single, multi} from './data';
   `
 })
 
-export class InphPieChartComponent implements OnInit, OnChanges {
+export class InphPieChartComponent implements OnInit {
 
   @ViewChild('innerChart') chart: PieChartComponent;
   @Input() single: any[];
@@ -53,9 +51,5 @@ export class InphPieChartComponent implements OnInit, OnChanges {
   updateGraphDatas(datas: any[]) {
     this.single = datas;
     this.chart.update();
-  }
-
-  ngOnChanges() {
-    console.log('changed');
   }
 }

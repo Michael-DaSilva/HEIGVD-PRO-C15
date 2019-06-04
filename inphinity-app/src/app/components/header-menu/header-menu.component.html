@@ -26,7 +26,7 @@
           {{username}}
         </a>
         <div class="dropdown-menu" aria-labelledby="dropdown-login-navbar" style="right: 0;left: unset;">
-          <a class="dropdown-item" routerLink="log-out">Se déconnecter</a>
+          <a class="dropdown-item" (click)="signOut()">Se déconnecter</a>
         </div>
       </li>
     </ul>

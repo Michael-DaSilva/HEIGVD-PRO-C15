@@ -1,30 +1,32 @@
-import { BrowserModule } from '@angular/platform-browser';
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { NgModule } from '@angular/core';
-import { AppComponent } from './app.component';
-import { HeaderMenuComponent } from './components/header-menu/header-menu.component';
+import {BrowserModule} from '@angular/platform-browser';
+import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
+import {NgModule} from '@angular/core';
+import {AppComponent} from './app.component';
+import {HeaderMenuComponent} from './components/header-menu/header-menu.component';
 import {AuthService} from './services/auth.service';
-import { AuthViewComponent } from './views/auth-view/auth-view.component';
-import { GeneralViewComponent } from './views/general-view/general-view.component';
-import { Routes } from '@angular/router';
-import { RouterModule } from '@angular/router';
-import { LoginFormComponent } from './components/login-form/login-form.component';
-import { FormsModule } from '@angular/forms';
-import { HttpClientModule } from '@angular/common/http';
-import { CouplesViewComponent } from './views/couples-view/couples-view.component';
-import { BacteriumViewComponent } from './views/bacterium-view/bacterium-view.component';
-import { BacteriopphageViewComponent } from './views/bacteriopphage-view/bacteriopphage-view.component';
-import { InphPieChartComponent } from './components/pie-chart/pie-chart.component';
-import { NgxGraphModule } from '@swimlane/ngx-graph';
-import { NgxChartsModule } from '@swimlane/ngx-charts';
+import {AuthViewComponent} from './views/auth-view/auth-view.component';
+import {GeneralViewComponent} from './views/general-view/general-view.component';
+import {Routes} from '@angular/router';
+import {RouterModule} from '@angular/router';
+import {LoginFormComponent} from './components/login-form/login-form.component';
+import {FormsModule} from '@angular/forms';
+import {HttpClientModule} from '@angular/common/http';
+import {CouplesViewComponent} from './views/couples-view/couples-view.component';
+import {BacteriumViewComponent} from './views/bacterium-view/bacterium-view.component';
+import {BacteriopphageViewComponent} from './views/bacteriopphage-view/bacteriopphage-view.component';
+import {InphPieChartComponent} from './components/pie-chart/pie-chart.component';
+import {NgxGraphModule} from '@swimlane/ngx-graph';
+import {NgxChartsModule} from '@swimlane/ngx-charts';
+import {AuthGuard} from './services/auth-guard.service';
+import { BarChartComponent } from './components/bar-chart/bar-chart.component';
 
 const appRoutes: Routes = [
-  { path: 'login', component: AuthViewComponent },
-  { path: 'log-out', component: AuthViewComponent},
-  { path: 'couples', component: CouplesViewComponent},
-  { path: 'bacterium', component : BacteriumViewComponent},
-  { path: 'bacteriophage', component : BacteriopphageViewComponent},
-  { path: '', component: GeneralViewComponent }
+  {path: 'login', component: AuthViewComponent},
+  {path: 'log-out', component: AuthViewComponent},
+  {path: 'couples', component: CouplesViewComponent, canActivate: [AuthGuard]},
+  {path: 'bacterium', component: BacteriumViewComponent, canActivate: [AuthGuard]},
+  {path: 'bacteriophage', component: BacteriopphageViewComponent, canActivate: [AuthGuard]},
+  {path: '', component: GeneralViewComponent, canActivate: [AuthGuard]}
 ];
 
 @NgModule({
@@ -37,7 +39,8 @@ const appRoutes: Routes = [
     CouplesViewComponent,
     BacteriumViewComponent,
     BacteriopphageViewComponent,
-    InphPieChartComponent
+    InphPieChartComponent,
+    BarChartComponent
   ],
   imports: [
     BrowserModule,
@@ -53,4 +56,5 @@ const appRoutes: Routes = [
   ],
   bootstrap: [AppComponent]
 })
-export class AppModule { }
+export class AppModule {
+}
