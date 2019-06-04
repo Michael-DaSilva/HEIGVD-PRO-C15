@@ -38,7 +38,8 @@ const appRoutes: Routes = [
     CouplesViewComponent,
     BacteriumViewComponent,
     BacteriopphageViewComponent,
-    InphPieChartComponent
+    InphPieChartComponent,
+    BarChartComponent
   ],
   imports: [
     BrowserModule,
