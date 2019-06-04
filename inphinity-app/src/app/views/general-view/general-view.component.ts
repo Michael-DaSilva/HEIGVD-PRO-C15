@@ -2,10 +2,13 @@ import { Component, OnInit, ViewChild  } from '@angular/core';
 import {APIDatasService} from '../../services/apidatas.service';
 import {AuthService} from '../../services/auth.service';
 import { Family } from 'src/app/models/family';
+import { Genus } from '../../models/genus';
 import { Couple } from 'src/app/models/couple';
-import { Interaction } from 'src/app/models/interaction';
+import { Specie } from '../../models/specie';
 import { InphPieChartComponent } from 'src/app/components/pie-chart/pie-chart.component';
-import { BarChartComponent } from 'src/app/components/bar-chart/bar-chart.component';
+import { BarChartComponent } from 'src/app/components/bar-chart/bar-chart.component'; 
+
+
 @Component({
   selector: 'app-general-view',
   templateUrl: './general-view.component.html',
@@ -13,16 +16,23 @@ import { BarChartComponent } from 'src/app/components/bar-chart/bar-chart.compon
 })
 
 export class GeneralViewComponent implements OnInit {
+
   @ViewChild('familiesChart')     famChart      : InphPieChartComponent;
   @ViewChild('interactionsChart') interChart    : InphPieChartComponent;
   @ViewChild('DNAContig')         DNAContigChart: BarChartComponent;
   @ViewChild('NoContig')          noContigChart : BarChartComponent;
+  @ViewChild('genusesChart')      genChart      : InphPieChartComponent;
+  @ViewChild('speciesChart')      speChart      : InphPieChartComponent;
 
-  constructor(private api : APIDatasService, private authService: AuthService) { }
+  constructor(private api: APIDatasService, private authService: AuthService) { }
 
   ngOnInit() {
-    this.fetchFamilyDatas();
-    this.fetchInteractionsData();
+    this.fetchData('family', 0);
+    this.fetchData('genus', 0);
+    this.fetchData('specie', 0);
+    this.fetchData('couple', 0);
+    
+    //temp values
     this.fetchDNAContigData();
     this.fetchNoContigData();
   }
@@ -148,64 +158,206 @@ export class GeneralViewComponent implements OnInit {
   fetchInteractionsData(){
     let coupleRes = this.api.getDatas('/couple/', this.authService.getToken());
     let interactionsRes = this.api.getDatas('/intervalidity/', this.authService.getToken());
+>>>>>>> master
 
-    let couplesList : Couple[], interactionsTypes : Interaction[];
+  /**
+   * author : R. Fournier
+   * updated: M. Da Silva, 04.06.2019
+   * goal   : Send GET request to API and returns the results (via exceptions)
+   *
+   * parameters : type : string of the contents asked
+   *              id : number to filter which contents print by id (used for genus and specie)
+   */
+  fetchData(type: string, id: number) {
+    const Res = this.api.getDatas('/' + type + '/', this.authService.getToken());
+    let array: any[];
 
-    if(typeof(coupleRes) !== 'undefined' && typeof(interactionsRes) !== 'undefined'){
-      coupleRes.subscribe( 
-        res     =>{couplesList = res as Couple[]},
-        error   =>{console.log("Error getting couples");console.log(error)},
+    if (typeof(Res) !== 'undefined') {
+      Res.subscribe(
+        res     => {
+            if (type === 'couple') {
+              array = res as Couple[];
+            } else if (type === 'family') {
+              array = res as Family[];
+            } else if (type === 'genus') {
+              array = res as Genus[];
+            } else if (type === 'specie') {
+              array = res as Specie[];
+            }
+          },
+        error   => {console.log('Error getting couples'); console.log(error); },
         ()      => {
-          interactionsRes.subscribe( 
-            res     =>{interactionsTypes = res as Interaction[]},
-            error   =>{console.log("Error getting interactions" + error);},
-            ()      => {
-              console.log("Calculating interactions");
-              this.interChart.updateGraphDatas(this.IntercationsToGraphData(couplesList, interactionsTypes));
-            });
+          if (type === 'couple') {
+            this.interChart.updateGraphDatas(this.IntercationsToGraphData(array));
+          } else if (type === 'family') {
+            this.famChart.updateGraphDatas(this.FamiliesToGraphData(array));
+          } else if (type === 'genus') {
+            this.genChart.updateGraphDatas(this.GenusToGraphData(array, id));
+          } else if (type === 'specie') {
+            this.speChart.updateGraphDatas(this.SpeciesToGraphData(array, id));
+          }
         });
     }
 
   }
 
-  private fetchFamilyDatas(){
-    let res = this.api.getDatas('/family/', this.authService.getToken());
-    let array : Array<Family>;
-    
-    if(typeof(res) !== 'undefined' ){
-      res.subscribe( 
-        res     =>{array = res as any[]},
-        error   =>{console.log("Error getting values" + error);},
-        ()      => {this.famChart.updateGraphDatas(this.FamiliesToGraphData(array));}
-        );
-    }
-  }
+  /**
+   * author : R. Fournier
+   * updated: M. Da Silva, 04.06.2019
+   * goal   : Calculate the values for the pie chart of Interaction
+   *
+   * parameters : couples : Array of type Couple who contains the couples from the data base
+   */
+  private IntercationsToGraphData(couples: Array<Couple>): any[] {
+    const result = new Array<any>();
+    let positive = 0;
+    let negative = 0;
 
-  private IntercationsToGraphData(couples : Array<Couple>, possibleInteractions : Interaction[]) : any[]{
-    var result = new Array<any>();
-    for(var _i = 0; _i < possibleInteractions.length; _i++){
-      result.push(
-            {
-              "name" : possibleInteractions[_i].designation,
-              "value" : 0
-            })
+    for (const value of couples) {
+      if (value.interaction_type) {
+        positive++;
+      } else {
+        negative++;
+      }
     }
 
-    for(var _i = 0; _i < couples.length; _i++){
-        (result[couples[_i].level]).value += 1;
-    }
+    result.push({
+      name: 'positive',
+      value: positive
+    });
+    result.push({
+      name: 'negative',
+      value: negative
+    });
 
     return result;
   }
-  private FamiliesToGraphData(datas : Array<Family>) : any[]{
-    var result = new Array<any>();
-    for(var _i = 0; _i < datas.length; _i++){
+
+  /**
+   * author : R. Fournier
+   * updated: M. Da Silva, 04.06.2019
+   * goal   : Calculate the values for the pie chart of Family
+   *
+   * parameters : datas : Array of type Family who contains the families from the data base
+   */
+  private FamiliesToGraphData(datas: Array<Family>): any[] {
+    let result = new Array<any>();
+    for (const value of datas) {
       result.push(
-            {
-              "name" : datas[_i].designation,
-              "value" : datas[_i].genuses.length
-            })
+        {
+          name : value.designation,
+          value : value.genuses.length
+        });
     }
+
+    result.sort((a, b) => {
+      return a.value - b.value;
+    }).reverse();
+
+    // result = this.RegroupDatas(result);
     return result;
+  }
+
+  /**
+   * author : R. Fournier
+   * updated: M. Da Silva, 04.06.2019
+   * goal   : Calculate the values for the pie chart of Genus
+   *
+   * parameters : datas : Array of type Genus who contains the genuses from the data base
+   *              family: number (id) of the family searched (for filtering)
+   */
+  private GenusToGraphData(datas: Array<Genus>, family: number): any[] {
+    let result = new Array<any>();
+    if (family) {
+      for (const value of datas) {
+        if (value.family === family) {
+          result.push(
+            {
+              name : value.designation,
+              value : value.species.length
+            });
+        }
+      }
+    } else {
+      for (const value of datas) {
+        result.push(
+          {
+            name : value.designation,
+            value : value.species.length
+          });
+      }
+    }
+
+    result.sort((a, b) => {
+      return a.value - b.value;
+    }).reverse();
+
+    // result = this.RegroupDatas(result);
+    return result;
+  }
+
+  /**
+   * author : R. Fournier
+   * updated: M. Da Silva, 04.06.2019
+   * goal   : Calculate the values for the pie chart of Specie
+   *
+   * parameters : datas : Array of type Specie who contains the species from the data base
+   *              genus: number (id) of the genus searched (for filtering)
+   */
+  private SpeciesToGraphData(datas: Array<Specie>, genus: number): any[] {
+    let result = new Array<any>();
+    if (genus) {
+      for (const value of datas) {
+        if (value.genus === genus) {
+          result.push(
+            {
+              name : value.designation,
+              value : value.strains.length
+            });
+        }
+      }
+    } else {
+      for (const value of datas) {
+        result.push(
+          {
+            name : value.designation,
+            value : value.strains.length
+          });
+      }
+    }
+
+    result.sort((a, b) => {
+      return a.value - b.value;
+    }).reverse();
+
+    // result = this.RegroupDatas(result);
+    return result;
+  }
+
+  /**
+   * author : M. Da Silva
+   * goal   : Regroup the datas for better reading in pie charts
+   *
+   * parameters : datas : Array of datas who contains the values to regroup accordingly
+   */
+  private RegroupDatas(datas: Array<any>): any[] {
+    let others = 0;
+    let result = [];
+    if (datas.length > 4) {
+      result.push(datas[0]);
+      result.push(datas[1]);
+      result.push(datas[2]);
+
+      for (const value of datas) {
+        others += value.value;
+      }
+      result.push({
+        name: 'Others',
+        value: others
+      });
+      return result;
+    } else {
+      return datas;
+    }
   }
 }

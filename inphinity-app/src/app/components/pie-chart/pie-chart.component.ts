@@ -27,9 +27,10 @@ export class InphPieChartComponent implements OnInit {
   multi: any[];
 
   view: any[] = [700, 400];
+  gradient = false;
 
   // options
-  showLegend = true;
+  showLegend = false;
 
   colorScheme = {
     domain: ['#5AA454', '#A10A28', '#C7B42C', '#AAAAAA']
@@ -41,14 +42,13 @@ export class InphPieChartComponent implements OnInit {
   doughnut = false;
 
   constructor() {}
-  
+
   onSelect(event) {
     console.log(event);
   }
   ngOnInit() {
   }
-
-  updateGraphDatas(datas : any[]){
+  updateGraphDatas(datas: any[]) {
     this.single = datas;
     this.chart.update();
   }
