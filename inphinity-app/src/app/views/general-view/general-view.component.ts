@@ -31,14 +31,14 @@ export class GeneralViewComponent implements OnInit {
     this.fetchData('genus', 0);
     this.fetchData('specie', 0);
     this.fetchData('couple', 0);
-    
-    //temp values
+
+    // temp values
     this.fetchDNAContigData();
     this.fetchNoContigData();
   }
-  
-  fetchNoContigData(){
-    var data = [
+
+  fetchNoContigData() {
+    const data = [
       {
         "name": "0 - 10",
         "series": [
@@ -52,7 +52,6 @@ export class GeneralViewComponent implements OnInit {
           }
         ]
       },
-    
       {
         "name": "10 - 20",
         "series": [
@@ -122,8 +121,8 @@ export class GeneralViewComponent implements OnInit {
     this.noContigChart.updateGraphDatas(data, 'Nb of contigs', 'Frequency')
   }
 
-  fetchDNAContigData(){
-    var data = [
+  fetchDNAContigData() {
+    const data = [
       {
         "name": "Whole DNA",
         "series": [
@@ -137,7 +136,6 @@ export class GeneralViewComponent implements OnInit {
           }
         ]
       },
-    
       {
         "name": "Contig",
         "series": [
