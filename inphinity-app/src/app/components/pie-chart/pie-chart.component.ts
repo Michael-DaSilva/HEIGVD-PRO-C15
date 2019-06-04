@@ -1,5 +1,5 @@
-import { Component, OnInit, Input,ChangeDetectionStrategy, OnChanges, ViewChild  } from '@angular/core';
-import {NgxChartsModule, PieChartComponent} from "@swimlane/ngx-charts";
+import { Component, OnInit, Input, ChangeDetectionStrategy, OnChanges, ViewChild  } from '@angular/core';
+import {NgxChartsModule, PieChartComponent} from '@swimlane/ngx-charts';
 import * as shape from 'd3-shape';
 import {single, multi} from './data';
 
@@ -29,9 +29,10 @@ export class InphPieChartComponent implements OnInit, OnChanges {
   multi: any[];
 
   view: any[] = [700, 400];
+  gradient = false;
 
   // options
-  showLegend = true;
+  showLegend = false;
 
   colorScheme = {
     domain: ['#5AA454', '#A10A28', '#C7B42C', '#AAAAAA']
@@ -43,19 +44,18 @@ export class InphPieChartComponent implements OnInit, OnChanges {
   doughnut = false;
 
   constructor() {}
-  
+
   onSelect(event) {
     console.log(event);
   }
   ngOnInit() {
   }
-
-  updateGraphDatas(datas : any[]){
+  updateGraphDatas(datas: any[]) {
     this.single = datas;
     this.chart.update();
   }
-  
-  ngOnChanges(){
-    console.log("changed");
+
+  ngOnChanges() {
+    console.log('changed');
   }
 }
