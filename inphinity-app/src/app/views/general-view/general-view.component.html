@@ -14,7 +14,7 @@
   <div class="contig-prot-length">
     <h2 >Contig & Protein Lengthes</h2>
     <div class="col-xs-6">
-      <app-bar-chart #DNAContig></app-bar-chart>
+      <app-candlestick-chart [data]="dnaContigData" [columnNames]="['Nom', 'Min1', 'Min2', 'Max1', 'Max2']"></app-candlestick-chart>
     </div>
     <div class="col-xs-6">
       <app-bar-chart #NoContig></app-bar-chart>
