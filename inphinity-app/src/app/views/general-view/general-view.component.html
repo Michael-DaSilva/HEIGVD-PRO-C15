@@ -9,7 +9,16 @@
   </div>
   <div class="contig-prot-length">
     <h2 >Contig & Protein Lengthes</h2>
-    <div class="ct-chart ct-golden-section" id="contig-prot-chart"></div>
+    <div class="col-xs-6">
+      <app-bar-chart #DNAContig></app-bar-chart>
+    </div>
+    <div class="col-xs-6">
+      <app-bar-chart #NoContig></app-bar-chart>
+    </div>
+  </div>
+  <div class="dna-contig">
+    <h2 >DNA - Contig</h2>
+    <div class="ct-chart ct-golden-section" id="dna-contig-chart"></div>
   </div>
   <div class="contig-length">
     <h2 >Contig Length</h2>
@@ -18,10 +27,6 @@
   <div class="dna-length">
     <h2 >DNA Length</h2>
     <div class="ct-chart ct-golden-section" id="dna-length-chart"></div>
-  </div>
-  <div class="dna-contig">
-    <h2 >DNA - Contig</h2>
-    <div class="ct-chart ct-golden-section" id="dna-contig-chart"></div>
   </div>
   <div class="proteins">
     <h2 >Proteins</h2>

@@ -5,6 +5,7 @@ import { Family } from 'src/app/models/family';
 import { Couple } from 'src/app/models/couple';
 import { Interaction } from 'src/app/models/interaction';
 import { InphPieChartComponent } from 'src/app/components/pie-chart/pie-chart.component';
+import { BarChartComponent } from 'src/app/components/bar-chart/bar-chart.component';
 @Component({
   selector: 'app-general-view',
   templateUrl: './general-view.component.html',
@@ -12,16 +13,137 @@ import { InphPieChartComponent } from 'src/app/components/pie-chart/pie-chart.co
 })
 
 export class GeneralViewComponent implements OnInit {
-  @ViewChild('familiesChart') famChart: InphPieChartComponent;
-  @ViewChild('interactionsChart') interChart: InphPieChartComponent;
+  @ViewChild('familiesChart')     famChart      : InphPieChartComponent;
+  @ViewChild('interactionsChart') interChart    : InphPieChartComponent;
+  @ViewChild('DNAContig')         DNAContigChart: BarChartComponent;
+  @ViewChild('NoContig')          noContigChart : BarChartComponent;
 
   constructor(private api : APIDatasService, private authService: AuthService) { }
 
   ngOnInit() {
     this.fetchFamilyDatas();
     this.fetchInteractionsData();
+    this.fetchDNAContigData();
+    this.fetchNoContigData();
   }
   
+  fetchNoContigData(){
+    var data = [
+      {
+        "name": "0 - 10",
+        "series": [
+          {
+            "name": "Bacteriums",
+            "value": 100
+          },
+          {
+            "name": "Bacteriophages",
+            "value": 50
+          }
+        ]
+      },
+    
+      {
+        "name": "10 - 20",
+        "series": [
+          {
+            "name": "Bacteriums",
+            "value": 120
+          },
+          {
+            "name": "Bacteriophages",
+            "value": 75
+          }
+        ]
+      },
+      {
+        "name": "20 - 30",
+        "series": [
+          {
+            "name": "Bacteriums",
+            "value": 110
+          },
+          {
+            "name": "Bacteriophages",
+            "value": 48
+          }
+        ]
+      },
+      {
+        "name": "30 - 40",
+        "series": [
+          {
+            "name": "Bacteriums",
+            "value": 50
+          },
+          {
+            "name": "Bacteriophages",
+            "value": 45
+          }
+        ]
+      },
+      {
+        "name": "40 - 50",
+        "series": [
+          {
+            "name": "Bacteriums",
+            "value": 44
+          },
+          {
+            "name": "Bacteriophages",
+            "value": 21
+          }
+        ]
+      },
+      {
+        "name": "50+",
+        "series": [
+          {
+            "name": "Bacteriums",
+            "value": 25
+          },
+          {
+            "name": "Bacteriophages",
+            "value": 20
+          }
+        ]
+      },
+    ];
+    this.noContigChart.updateGraphDatas(data, 'Nb of contigs', 'Frequency')
+  }
+
+  fetchDNAContigData(){
+    var data = [
+      {
+        "name": "Whole DNA",
+        "series": [
+          {
+            "name": "Bacteriums",
+            "value": 1275
+          },
+          {
+            "name": "Bacteriophages",
+            "value": 867
+          }
+        ]
+      },
+    
+      {
+        "name": "Contig",
+        "series": [
+          {
+            "name": "Bacteriums",
+            "value": 1013
+          },
+          {
+            "name": "Bacteriophages",
+            "value": 786
+          }
+        ]
+      }
+    ];
+    this.DNAContigChart.updateGraphDatas(data, '', 'Frequency');
+  }
 
   fetchInteractionsData(){
     let coupleRes = this.api.getDatas('/couple/', this.authService.getToken());
