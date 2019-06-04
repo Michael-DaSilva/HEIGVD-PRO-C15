@@ -19,6 +19,7 @@ import {NgxGraphModule} from '@swimlane/ngx-graph';
 import {NgxChartsModule} from '@swimlane/ngx-charts';
 import {AuthGuard} from './services/auth-guard.service';
 import { BarChartComponent } from './components/bar-chart/bar-chart.component';
+import { CoupleComponent } from './components/couple/couple.component';
 
 const appRoutes: Routes = [
   {path: 'login', component: AuthViewComponent},
@@ -40,7 +41,8 @@ const appRoutes: Routes = [
     BacteriumViewComponent,
     BacteriopphageViewComponent,
     InphPieChartComponent,
-    BarChartComponent
+    BarChartComponent,
+    CoupleComponent
   ],
   imports: [
     BrowserModule,

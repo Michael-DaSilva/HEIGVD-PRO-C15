@@ -178,7 +178,7 @@ export class GeneralViewComponent implements OnInit {
               array = res as Specie[];
             }
           },
-        error   => {console.log('Error getting couples'); console.log(error); },
+        error   => {console.log('Error getting ' + type); console.log(error); },
         ()      => {
           if (type === 'couple') {
             this.interChart.updateGraphDatas(this.IntercationsToGraphData(array));
