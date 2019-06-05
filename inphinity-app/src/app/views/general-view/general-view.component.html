@@ -3,13 +3,13 @@
     <div class="families row">
         <div class="interactions col-xl-4 chart-col">
             <h2>Family</h2>
-            <app-pie-chart #familiesChart name="Family"></app-pie-chart>
+            <app-pie-chart #familiesChart name="Family" *ngIf="genusSelectedId"></app-pie-chart>
         </div>
         <div class="interactions col-xl-4 chart-col">
             <h2>Genus</h2>
             <app-pie-chart #genusesChart></app-pie-chart>
         </div>
-        <div class="interactions col-xl-4 chart-col">
+        <div class="interactions col-xl-4 chart-col" *ngIf="specieSelectedId">
             <h2>Specie</h2>
             <app-pie-chart #speciesChart></app-pie-chart>
         </div>
@@ -22,6 +22,7 @@
             <app-pie-chart #interactionsChart></app-pie-chart>
         </div>
         <div class="contig-prot-length col-xl-6 chart-col">
+
             <h2>Contig & Protein Lengthes</h2>
             <app-candlestick-chart [data]="contigProteinLengthData" vAxisTitle="Frequency" hAxisTitle="Length"
                 [columnNames]="['Nom', 'Min1', 'Min2', 'Max1', 'Max2']"></app-candlestick-chart>
@@ -60,6 +61,4 @@
                 [columnNames]="['Nom', 'Min1', 'Min2', 'Max1', 'Max2']"></app-candlestick-chart>
         </div>
     </div>
-
-
 </div>
