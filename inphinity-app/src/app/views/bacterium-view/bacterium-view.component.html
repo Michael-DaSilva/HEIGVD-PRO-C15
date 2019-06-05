@@ -1,3 +1,12 @@
-<p>
-  bacterium-view works!
-</p>
+<div class="container">
+    <div class="row"></div>
+    <h3>{{bacterium.acc_number}} (ID:{{bacterium.id}})</h3>
+    <h4>Source data : {{bacterium.source_data}}</h4>
+    <h4>Person responsible : {{personResponsible}}</h4>
+    <h4>Whole DNA :</h4>
+    <textarea cols="100" rows="20" disabled>{{wholeDNA}}</textarea>
+    <div>Sequence length: {{wholeDNA.length}}</div>
+    <h4>Contig :</h4>
+    <textarea cols="100" rows="20" disabled>{{wholeContig}}</textarea>
+    <div>Sequence length: {{wholeContig.length}}</div>
+</div>
