@@ -349,12 +349,10 @@ export class GeneralViewComponent implements OnInit {
    */
   private RegroupDatas(datas: Array<any>, target): any[] {
     let others = 0;
-<<<<<<< HEAD
+
     let result = [];
     let tmp =[];
-=======
-    const result = [];
->>>>>>> refs/remotes/origin/master
+    
     if (datas.length > 4) {
       result.push(datas[0]);
       result.push(datas[1]);
