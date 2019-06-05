@@ -1,6 +1,5 @@
 import {Component, OnInit, ViewChild} from '@angular/core';
 import {APIDatasService} from '../../services/apidatas.service';
-import {AuthService} from '../../services/auth.service';
 import {Family} from 'src/app/models/family';
 import {Genus} from '../../models/genus';
 import {Couple} from 'src/app/models/couple';
