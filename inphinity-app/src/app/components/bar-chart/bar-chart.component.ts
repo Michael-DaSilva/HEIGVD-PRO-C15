@@ -28,7 +28,7 @@ export class BarChartComponent implements OnInit {
   @Input() single : any[]
   @Input() multi : any[];
 
-  view: any[] = [600, 500];
+  view: any[];
   showXAxis = true;
   showYAxis = true;
   gradient = false;

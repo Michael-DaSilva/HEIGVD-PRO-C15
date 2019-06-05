@@ -50,14 +50,15 @@ export class InphPieChartComponent implements OnInit {
   @Input() data: any[];
   @Input() onSelectcallback : any;
   @Input() name : string;
+  @Input() view: any[];
 
   multi: any[];
   onClickAdditionDatas: any [] = [];  
 
-  view: any[] = [700, 400];
+  
 
   // options
-  showLegend = true;
+  showLegend = false;
 
   colorScheme = {
     domain: ['#5AA454', '#A10A28', '#C7B42C', '#81A7F5']

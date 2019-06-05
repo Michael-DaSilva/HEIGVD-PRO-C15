@@ -1,67 +1,63 @@
-
 <div class="container">
-  
-    <div class="families">
-        <h2>Family</h2>
-        <app-pie-chart #familiesChart name="Family"></app-pie-chart>
-        <h2>Genus</h2>
-        <app-pie-chart #genusesChart></app-pie-chart>
-        <h2>Specie</h2>
-        <app-pie-chart #speciesChart></app-pie-chart>
+
+    <div class="families row">
+        <div class="interactions col-xl-4 chart-col">
+            <h2>Family</h2>
+            <app-pie-chart #familiesChart name="Family"></app-pie-chart>
+        </div>
+        <div class="interactions col-xl-4 chart-col">
+            <h2>Genus</h2>
+            <app-pie-chart #genusesChart></app-pie-chart>
+        </div>
+        <div class="interactions col-xl-4 chart-col">
+            <h2>Specie</h2>
+            <app-pie-chart #speciesChart></app-pie-chart>
+        </div>
+
+
     </div>
     <div class="row">
-        <div class="interactions col-xs-6">
+        <div class="interactions col-xl-6 chart-col">
             <h2>Interactions</h2>
             <app-pie-chart #interactionsChart></app-pie-chart>
         </div>
-        <div class="contig-prot-length col-xs-6">
+        <div class="contig-prot-length col-xl-6 chart-col">
             <h2>Contig & Protein Lengthes</h2>
-            <app-candlestick-chart [data]="contigProteinLengthData"
-                                   vAxisTitle="Frequency"
-                                   hAxisTitle="Length"
-                                   [columnNames]="['Nom', 'Min1', 'Min2', 'Max1', 'Max2']"></app-candlestick-chart>
+            <app-candlestick-chart [data]="contigProteinLengthData" vAxisTitle="Frequency" hAxisTitle="Length"
+                [columnNames]="['Nom', 'Min1', 'Min2', 'Max1', 'Max2']"></app-candlestick-chart>
         </div>
     </div>
-
-    <div class="contig-prot-length">
-        <h2>DNA / Contig</h2>
-        <div class="col-xs-6">
+    <h2 style="font-size : 25px; margin-bottom: 10px;">DNA / Contig</h2>
+    <div class="contig-prot-length row">
+        <div class="col-xl-6 chart-col">
             <app-bar-chart #DNAContig></app-bar-chart>
         </div>
-        <div class="col-xs-6">
+        <div class="col-xl-6 chart-col">
             <app-bar-chart #NoContig></app-bar-chart>
         </div>
     </div>
     <div class="row">
-        <div class="contig-length col-sm-6">
+        <div class="contig-length col-xl-6 chart-col">
             <h2>Contig Length</h2>
-            <app-candlestick-chart [data]="contigLengthData"
-                                   vAxisTitle="Frequency"
-                                   hAxisTitle="Contig length"
-                                   [columnNames]="['Nom', 'Min1', 'Min2', 'Max1', 'Max2']"></app-candlestick-chart>
+            <app-candlestick-chart [data]="contigLengthData" vAxisTitle="Frequency" hAxisTitle="Contig length"
+                [columnNames]="['Nom', 'Min1', 'Min2', 'Max1', 'Max2']"></app-candlestick-chart>
         </div>
-        <div class="dna-length col-sm-6">
+        <div class="dna-length col-xl-6 chart-col">
             <h2>DNA Length</h2>
-            <app-candlestick-chart [data]="dnaLengthData"
-                                   vAxisTitle="Frequency"
-                                   hAxisTitle="DNA length"
-                                   [columnNames]="['Nom', 'Min1', 'Min2', 'Max1', 'Max2']"></app-candlestick-chart>
+            <app-candlestick-chart [data]="dnaLengthData" vAxisTitle="Frequency" hAxisTitle="DNA length"
+                [columnNames]="['Nom', 'Min1', 'Min2', 'Max1', 'Max2']"></app-candlestick-chart>
         </div>
     </div>
     <div class="row">
-        <div class="proteins col-sm-6">
+        <div class="proteins col-xl-6 chart-col">
             <h2>Proteins</h2>
-            <app-candlestick-chart [data]="proteinCountData"
-                                   vAxisTitle="Frequency"
-                                   hAxisTitle="Proteins count"
-                                   [columnNames]="['Nom', 'Min1', 'Min2', 'Max1', 'Max2']"></app-candlestick-chart>
+            <app-candlestick-chart [data]="proteinCountData" vAxisTitle="Frequency" hAxisTitle="Proteins count"
+                [columnNames]="['Nom', 'Min1', 'Min2', 'Max1', 'Max2']"></app-candlestick-chart>
         </div>
-        <div class="gene col-sm-6">
+        <div class="gene col-xl-6 chart-col">
             <h2>Gene</h2>
-            <app-candlestick-chart [data]="geneCountData"
-                                   vAxisTitle="Frequency"
-                                   hAxisTitle="Genes count"
-                                   [columnNames]="['Nom', 'Min1', 'Min2', 'Max1', 'Max2']"></app-candlestick-chart>
+            <app-candlestick-chart [data]="geneCountData" vAxisTitle="Frequency" hAxisTitle="Genes count"
+                [columnNames]="['Nom', 'Min1', 'Min2', 'Max1', 'Max2']"></app-candlestick-chart>
         </div>
     </div>
 
