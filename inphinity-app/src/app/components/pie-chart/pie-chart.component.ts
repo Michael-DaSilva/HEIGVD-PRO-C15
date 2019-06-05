@@ -25,12 +25,12 @@ export class InphPieChartComponent implements OnInit {
   @ViewChild('innerChart') chart: PieChartComponent;
   @Input() single: any[];
   multi: any[];
+  onClickAdditionDatas: any [] = [];  
 
   view: any[] = [700, 400];
-  gradient = false;
 
   // options
-  showLegend = false;
+  showLegend = true;
 
   colorScheme = {
     domain: ['#5AA454', '#A10A28', '#C7B42C', '#AAAAAA']
@@ -41,15 +41,28 @@ export class InphPieChartComponent implements OnInit {
   explodeSlices = false;
   doughnut = false;
 
-  constructor() {}
-
+  constructor() {
+  }
+  
   onSelect(event) {
     console.log(event);
+    console.log(event.name);
+    console.log(this.onClickAdditionDatas);
+    if(this.onClickAdditionDatas != undefined && this.onClickAdditionDatas[event.name] != undefined){
+      console.log(this.onClickAdditionDatas[event.name]);
+    } else {
+      console.log("no additional datas found");
+    }
   }
   ngOnInit() {
   }
-  updateGraphDatas(datas: any[]) {
+
+  updateGraphDatas(datas : any[]){
     this.single = datas;
     this.chart.update();
+  }
+
+  setAdditionnalDatas(id : string, val : any){
+    this.onClickAdditionDatas[id] = val;
   }
 }

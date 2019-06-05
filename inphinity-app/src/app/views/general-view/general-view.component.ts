@@ -185,7 +185,7 @@ export class GeneralViewComponent implements OnInit {
           if (type === 'couple') {
             this.interChart.updateGraphDatas(this.IntercationsToGraphData(array));
           } else if (type === 'family') {
-            this.famChart.updateGraphDatas(this.FamiliesToGraphData(array));
+            this.famChart.updateGraphDatas(this.RegroupDatas(this.FamiliesToGraphData(array),this.famChart ));
           } else if (type === 'genus') {
             this.genChart.updateGraphDatas(this.GenusToGraphData(array, id));
           } else if (type === 'specie') {
@@ -335,21 +335,24 @@ export class GeneralViewComponent implements OnInit {
    *
    * parameters : datas : Array of datas who contains the values to regroup accordingly
    */
-  private RegroupDatas(datas: Array<any>): any[] {
+  private RegroupDatas(datas: Array<any>, target): any[] {
     let others = 0;
     let result = [];
+    let tmp =[];
     if (datas.length > 4) {
       result.push(datas[0]);
       result.push(datas[1]);
       result.push(datas[2]);
 
-      for (const value of datas) {
-        others += value.value;
+      for (var _i = 3; _i < datas.length; _i++ ) {
+        others += datas[_i].value;
+        tmp.push(datas[_i]);
       }
       result.push({
         name: 'Others',
-        value: others
+        value: others,
       });
+      target.setAdditionnalDatas('Others', tmp);
       return result;
     } else {
       return datas;
