@@ -11,11 +11,25 @@ export class CandlestickChartComponent implements OnInit {
   @Input() columnNames: string[];
   @Input() data: Array<string | number>[] = [];
   @Input() title = '';
+  @Input() hAxisTitle = '';
+  @Input() vAxisTitle = '';
+
+  options = {
+    legend: 'none',
+    hAxis: {
+      title: ''
+    },
+    vAxis: {
+      title: ''
+    },
+  };
 
   constructor() {
   }
 
   ngOnInit() {
+    this.options.hAxis.title = this.hAxisTitle;
+    this.options.vAxis.title = this.vAxisTitle;
   }
 
 }
