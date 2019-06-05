@@ -30,6 +30,9 @@ export class GeneralViewComponent implements OnInit {
   proteinCountData: Array<string | number>[];
   geneCountData: Array<string | number>[];
 
+  genusSelectedId = 0;
+  specieSelectedId = 0;
+
   @ViewChild('content') modalContent: any;
 
   constructor(private api: APIDatasService) {
@@ -293,7 +296,7 @@ export class GeneralViewComponent implements OnInit {
       result.push(
         {
           name: value.designation,
-          value: value.genuses.length
+          value: value.genuses.length,
         });
     }
 

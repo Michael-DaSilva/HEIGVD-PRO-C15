@@ -4,11 +4,11 @@
             <h2>Family</h2>
             <app-pie-chart #familiesChart name="Family"></app-pie-chart>
         </div>
-        <div fxFlex="30%">
+        <div fxFlex="30%" *ngIf="genusSelectedId">
             <h2>Genus</h2>
             <app-pie-chart #genusesChart></app-pie-chart>
         </div>
-        <div fxFlex="30%">
+        <div fxFlex="30%" *ngIf="specieSelectedId">
             <h2>Specie</h2>
             <app-pie-chart #speciesChart></app-pie-chart>
         </div>
