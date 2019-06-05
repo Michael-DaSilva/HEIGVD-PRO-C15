@@ -15,8 +15,9 @@
         <div class="contig-prot-length col-xs-6">
             <h2>Contig & Protein Lengthes</h2>
             <app-candlestick-chart [data]="contigProteinLengthData"
+                                   vAxisTitle="Frequency"
+                                   hAxisTitle="Length"
                                    [columnNames]="['Nom', 'Min1', 'Min2', 'Max1', 'Max2']"></app-candlestick-chart>
-
         </div>
     </div>
 
@@ -32,26 +33,35 @@
     <div class="row">
         <div class="contig-length col-sm-6">
             <h2>Contig Length</h2>
-            <div class="ct-chart ct-golden-section" id="contig-length-chart">
-                <app-candlestick-chart [data]="contigProteinLengthData"
-                                       [columnNames]="['Nom', 'Min1', 'Min2', 'Max1', 'Max2']"></app-candlestick-chart>
-            </div>
+            <app-candlestick-chart [data]="contigLengthData"
+                                   vAxisTitle="Frequency"
+                                   hAxisTitle="Contig length"
+                                   [columnNames]="['Nom', 'Min1', 'Min2', 'Max1', 'Max2']"></app-candlestick-chart>
         </div>
         <div class="dna-length col-sm-6">
             <h2>DNA Length</h2>
-            <div class="ct-chart ct-golden-section" id="dna-length-chart"></div>
+            <app-candlestick-chart [data]="dnaLengthData"
+                                   vAxisTitle="Frequency"
+                                   hAxisTitle="DNA length"
+                                   [columnNames]="['Nom', 'Min1', 'Min2', 'Max1', 'Max2']"></app-candlestick-chart>
         </div>
     </div>
-  <div class="row">
-    <div class="proteins col-sm-6">
-      <h2>Proteins</h2>
-      <div class="ct-chart ct-golden-section" id="proteins-chart"></div>
+    <div class="row">
+        <div class="proteins col-sm-6">
+            <h2>Proteins</h2>
+            <app-candlestick-chart [data]="proteinCountData"
+                                   vAxisTitle="Frequency"
+                                   hAxisTitle="Proteins count"
+                                   [columnNames]="['Nom', 'Min1', 'Min2', 'Max1', 'Max2']"></app-candlestick-chart>
+        </div>
+        <div class="gene col-sm-6">
+            <h2>Gene</h2>
+            <app-candlestick-chart [data]="geneCountData"
+                                   vAxisTitle="Frequency"
+                                   hAxisTitle="Genes count"
+                                   [columnNames]="['Nom', 'Min1', 'Min2', 'Max1', 'Max2']"></app-candlestick-chart>
+        </div>
     </div>
-    <div class="gene col-sm-6">
-      <h2>Gene</h2>
-      <div class="ct-chart ct-golden-section" id="gene-chart"></div>
-    </div>
-  </div>
 
 
 </div>
