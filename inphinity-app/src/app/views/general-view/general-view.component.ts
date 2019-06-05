@@ -30,6 +30,9 @@ export class GeneralViewComponent implements OnInit {
   proteinCountData: Array<string | number>[];
   geneCountData: Array<string | number>[];
 
+  genusSelectedId = 0;
+  specieSelectedId = 0;
+
   @ViewChild('content') modalContent: any;
 
   constructor(private api: APIDatasService) {
@@ -293,7 +296,7 @@ export class GeneralViewComponent implements OnInit {
       result.push(
         {
           name: value.designation,
-          value: value.genuses.length
+          value: value.genuses.length,
         });
     }
 
@@ -390,15 +393,15 @@ export class GeneralViewComponent implements OnInit {
   private RegroupDatas(datas: Array<any>, target): any[] {
     let others = 0;
 
-    let result = [];
-    let tmp = [];
+    const result = [];
+    const tmp = [];
 
     if (datas.length > 4) {
       result.push(datas[0]);
       result.push(datas[1]);
       result.push(datas[2]);
 
-      for (var _i = 3; _i < datas.length; _i++) {
+      for (let _i = 3; _i < datas.length; _i++) {
         others += datas[_i].value;
         tmp.push(datas[_i]);
       }

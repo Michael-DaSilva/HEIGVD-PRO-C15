@@ -1,13 +1,17 @@
-.container > div {
-    float: left;
-    width: 100%;
+.container {
+  margin-left: 100px;
+  margin-right: 100px;
 }
 
-.modal-backdrop.fade
-   {
-     opacity: 0.5;
-   }
-   .modal-open .modal
-   {
-     opacity: 1;
-   }
+.container > div {
+  float: left;
+  width: 100%;
+}
+
+.modal-backdrop.fade {
+  opacity: 0.5;
+}
+
+.modal-open .modal {
+  opacity: 1;
+}
