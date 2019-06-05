@@ -3,9 +3,9 @@
     <div class="families row">
         <div class="interactions col-xl-4 chart-col">
             <h2>Family</h2>
-            <app-pie-chart #familiesChart name="Family" *ngIf="genusSelectedId"></app-pie-chart>
+            <app-pie-chart #familiesChart name="Family"></app-pie-chart>
         </div>
-        <div class="interactions col-xl-4 chart-col">
+        <div class="interactions col-xl-4 chart-col" *ngIf="genusSelectedId">
             <h2>Genus</h2>
             <app-pie-chart #genusesChart></app-pie-chart>
         </div>

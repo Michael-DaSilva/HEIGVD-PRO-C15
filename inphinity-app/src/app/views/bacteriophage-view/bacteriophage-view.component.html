@@ -1,0 +1,36 @@
+<div class="container">
+    <div class="row"></div>
+    <h3>{{bacteriophage.acc_number}} (ID:{{bacteriophage.id}})</h3>
+    <h4>Source data : {{bacteriophage.source_data}}</h4>
+    <h4>Person responsible : {{personResponsible}}</h4>
+    <div class="row">
+        <div class="col-xl-8">
+            <h4>Whole DNA :</h4>
+            <textarea style="font-size: 12px;" cols="100" rows="20" disabled>{{wholeDNA.text}}</textarea>
+            <div>Sequence length: {{wholeDNA.text.length}}</div>
+        </div>
+        <div class="col-xl-4">
+                <app-pie-chart #dnaChart></app-pie-chart>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-xl-8">
+                <h4>Contig :</h4>
+                <textarea style="font-size: 12px;" cols="100" rows="20" disabled>{{wholeContig.text}}</textarea>
+                <div>Sequence length: {{wholeContig.text.length}}</div>
+        </div>
+        <div class="col-xl-4">
+                <app-pie-chart #contilChart></app-pie-chart>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-xl-8">
+                <h4>Gene :</h4>
+                <textarea style="font-size: 12px;" cols="100" rows="20" disabled>{{wholeGenes.text}}</textarea>
+                <div>Sequence length: {{wholeGenes.text.length}}</div>
+        </div>
+        <div class="col-xl-4">
+                <app-pie-chart #geneChart></app-pie-chart>
+        </div>
+    </div>
+</div>
