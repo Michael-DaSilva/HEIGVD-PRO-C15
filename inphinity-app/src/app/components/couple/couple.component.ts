@@ -1,5 +1,5 @@
-import { Component, OnInit } from '@angular/core';
-import { Couple } from '../../models/couple';
+import {Component, Input, OnInit} from '@angular/core';
+import {Couple} from '../../models/couple';
 
 @Component({
   selector: 'app-couple',
@@ -7,18 +7,12 @@ import { Couple } from '../../models/couple';
   styleUrls: ['./couple.component.scss']
 })
 export class CoupleComponent implements OnInit {
-  data: Couple[];
+  @Input() data: Couple[];
 
-  constructor() { }
+  constructor() {
+  }
 
   ngOnInit() {
-  }
-
-  setData(data: Couple[]) {
-    this.data = data;
-  }
-
-  getData(): Couple[] {
-    return this.data;
+    console.log('data is', this.data);
   }
 }
