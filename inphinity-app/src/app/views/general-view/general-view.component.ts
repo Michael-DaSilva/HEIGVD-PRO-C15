@@ -1,12 +1,12 @@
-import { Component, OnInit, ViewChild  } from '@angular/core';
+import {Component, OnInit, ViewChild} from '@angular/core';
 import {APIDatasService} from '../../services/apidatas.service';
 import {AuthService} from '../../services/auth.service';
-import { Family } from 'src/app/models/family';
-import { Genus } from '../../models/genus';
-import { Couple } from 'src/app/models/couple';
-import { Specie } from '../../models/specie';
-import { InphPieChartComponent } from 'src/app/components/pie-chart/pie-chart.component';
-import { BarChartComponent } from 'src/app/components/bar-chart/bar-chart.component'; 
+import {Family} from 'src/app/models/family';
+import {Genus} from '../../models/genus';
+import {Couple} from 'src/app/models/couple';
+import {Specie} from '../../models/specie';
+import {InphPieChartComponent} from 'src/app/components/pie-chart/pie-chart.component';
+import {BarChartComponent} from 'src/app/components/bar-chart/bar-chart.component';
 
 
 @Component({
@@ -17,14 +17,16 @@ import { BarChartComponent } from 'src/app/components/bar-chart/bar-chart.compon
 
 export class GeneralViewComponent implements OnInit {
 
-  @ViewChild('familiesChart')     famChart      : InphPieChartComponent;
-  @ViewChild('interactionsChart') interChart    : InphPieChartComponent;
-  @ViewChild('DNAContig')         DNAContigChart: BarChartComponent;
-  @ViewChild('NoContig')          noContigChart : BarChartComponent;
-  @ViewChild('genusesChart')      genChart      : InphPieChartComponent;
-  @ViewChild('speciesChart')      speChart      : InphPieChartComponent;
+  @ViewChild('familiesChart') famChart: InphPieChartComponent;
+  @ViewChild('interactionsChart') interChart: InphPieChartComponent;
+  @ViewChild('NoContig') noContigChart: BarChartComponent;
+  @ViewChild('genusesChart') genChart: InphPieChartComponent;
+  @ViewChild('speciesChart') speChart: InphPieChartComponent;
+  @ViewChild('DNAContig') DNAContigChart: BarChartComponent;
+  contigProteinLengthData: Array<string | number>[];
 
-  constructor(private api: APIDatasService, private authService: AuthService) { }
+  constructor(private api: APIDatasService, private authService: AuthService) {
+  }
 
   ngOnInit() {
     this.fetchData('family', 0);
@@ -35,122 +37,131 @@ export class GeneralViewComponent implements OnInit {
     // temp values
     this.fetchDNAContigData();
     this.fetchNoContigData();
+    this.fetchContigLength();
   }
 
   fetchNoContigData() {
     const data = [
       {
-        "name": "0 - 10",
-        "series": [
+        name: '0 - 10',
+        series: [
           {
-            "name": "Bacteriums",
-            "value": 100
+            name: 'Bacteriums',
+            value: 100
           },
           {
-            "name": "Bacteriophages",
-            "value": 50
+            name: 'Bacteriophages',
+            value: 50
           }
         ]
       },
       {
-        "name": "10 - 20",
-        "series": [
+        name: '10 - 20',
+        series: [
           {
-            "name": "Bacteriums",
-            "value": 120
+            name: 'Bacteriums',
+            value: 120
           },
           {
-            "name": "Bacteriophages",
-            "value": 75
+            name: 'Bacteriophages',
+            value: 75
           }
         ]
       },
       {
-        "name": "20 - 30",
-        "series": [
+        name: '20 - 30',
+        series: [
           {
-            "name": "Bacteriums",
-            "value": 110
+            name: 'Bacteriums',
+            value: 110
           },
           {
-            "name": "Bacteriophages",
-            "value": 48
+            name: 'Bacteriophages',
+            value: 48
           }
         ]
       },
       {
-        "name": "30 - 40",
-        "series": [
+        name: '30 - 40',
+        series: [
           {
-            "name": "Bacteriums",
-            "value": 50
+            name: 'Bacteriums',
+            value: 50
           },
           {
-            "name": "Bacteriophages",
-            "value": 45
+            name: 'Bacteriophages',
+            value: 45
           }
         ]
       },
       {
-        "name": "40 - 50",
-        "series": [
+        name: '40 - 50',
+        series: [
           {
-            "name": "Bacteriums",
-            "value": 44
+            name: 'Bacteriums',
+            value: 44
           },
           {
-            "name": "Bacteriophages",
-            "value": 21
+            name: 'Bacteriophages',
+            value: 21
           }
         ]
       },
       {
-        "name": "50+",
-        "series": [
+        name: '50+',
+        series: [
           {
-            "name": "Bacteriums",
-            "value": 25
+            name: 'Bacteriums',
+            value: 25
           },
           {
-            "name": "Bacteriophages",
-            "value": 20
+            name: 'Bacteriophages',
+            value: 20
           }
         ]
       },
     ];
-    this.noContigChart.updateGraphDatas(data, 'Nb of contigs', 'Frequency')
+    this.noContigChart.updateGraphDatas(data, 'Nb of contigs', 'Frequency');
   }
 
   fetchDNAContigData() {
     const data = [
       {
-        "name": "Whole DNA",
-        "series": [
+        name: 'Whole DNA',
+        series: [
           {
-            "name": "Bacteriums",
-            "value": 1275
+            name: 'Bacteriums',
+            value: 1275
           },
           {
-            "name": "Bacteriophages",
-            "value": 867
+            name: 'Bacteriophages',
+            value: 867
           }
         ]
       },
+
       {
-        "name": "Contig",
-        "series": [
+        name: 'Contig',
+        series: [
           {
-            "name": "Bacteriums",
-            "value": 1013
+            name: 'Bacteriums',
+            value: 1013
           },
           {
-            "name": "Bacteriophages",
-            "value": 786
+            name: 'Bacteriophages',
+            value: 786
           }
         ]
       }
     ];
     this.DNAContigChart.updateGraphDatas(data, '', 'Frequency');
+  }
+
+  fetchContigLength() {
+    this.contigProteinLengthData = [
+      ['Contig (average)', 100, 250, 600, 800],
+      ['Protein', 90, 150, 400, 600]
+    ];
   }
 
   /**
@@ -165,21 +176,24 @@ export class GeneralViewComponent implements OnInit {
     const Res = this.api.getDatas('/' + type + '/', this.authService.getToken());
     let array: any[];
 
-    if (typeof(Res) !== 'undefined') {
+    if (typeof (Res) !== 'undefined') {
       Res.subscribe(
-        res     => {
-            if (type === 'couple') {
-              array = res as Couple[];
-            } else if (type === 'family') {
-              array = res as Family[];
-            } else if (type === 'genus') {
-              array = res as Genus[];
-            } else if (type === 'specie') {
-              array = res as Specie[];
-            }
-          },
-        error   => {console.log('Error getting couples'); console.log(error); },
-        ()      => {
+        res => {
+          if (type === 'couple') {
+            array = res as Couple[];
+          } else if (type === 'family') {
+            array = res as Family[];
+          } else if (type === 'genus') {
+            array = res as Genus[];
+          } else if (type === 'specie') {
+            array = res as Specie[];
+          }
+        },
+        error => {
+          console.log('Error getting couples');
+          console.log(error);
+        },
+        () => {
           if (type === 'couple') {
             this.interChart.updateGraphDatas(this.IntercationsToGraphData(array));
           } else if (type === 'family') {
@@ -234,12 +248,12 @@ export class GeneralViewComponent implements OnInit {
    * parameters : datas : Array of type Family who contains the families from the data base
    */
   private FamiliesToGraphData(datas: Array<Family>): any[] {
-    let result = new Array<any>();
+    const result = new Array<any>();
     for (const value of datas) {
       result.push(
         {
-          name : value.designation,
-          value : value.genuses.length
+          name: value.designation,
+          value: value.genuses.length
         });
     }
 
@@ -260,14 +274,14 @@ export class GeneralViewComponent implements OnInit {
    *              family: number (id) of the family searched (for filtering)
    */
   private GenusToGraphData(datas: Array<Genus>, family: number): any[] {
-    let result = new Array<any>();
+    const result = new Array<any>();
     if (family) {
       for (const value of datas) {
         if (value.family === family) {
           result.push(
             {
-              name : value.designation,
-              value : value.species.length
+              name: value.designation,
+              value: value.species.length
             });
         }
       }
@@ -275,8 +289,8 @@ export class GeneralViewComponent implements OnInit {
       for (const value of datas) {
         result.push(
           {
-            name : value.designation,
-            value : value.species.length
+            name: value.designation,
+            value: value.species.length
           });
       }
     }
@@ -298,14 +312,14 @@ export class GeneralViewComponent implements OnInit {
    *              genus: number (id) of the genus searched (for filtering)
    */
   private SpeciesToGraphData(datas: Array<Specie>, genus: number): any[] {
-    let result = new Array<any>();
+    const result = new Array<any>();
     if (genus) {
       for (const value of datas) {
         if (value.genus === genus) {
           result.push(
             {
-              name : value.designation,
-              value : value.strains.length
+              name: value.designation,
+              value: value.strains.length
             });
         }
       }
@@ -313,8 +327,8 @@ export class GeneralViewComponent implements OnInit {
       for (const value of datas) {
         result.push(
           {
-            name : value.designation,
-            value : value.strains.length
+            name: value.designation,
+            value: value.strains.length
           });
       }
     }
@@ -335,7 +349,7 @@ export class GeneralViewComponent implements OnInit {
    */
   private RegroupDatas(datas: Array<any>): any[] {
     let others = 0;
-    let result = [];
+    const result = [];
     if (datas.length > 4) {
       result.push(datas[0]);
       result.push(datas[1]);
