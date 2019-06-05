@@ -32,9 +32,8 @@ export class GeneralViewComponent implements OnInit {
 
   @ViewChild("content") modalContent: any;
 
-  testData: any;
-
   constructor(private api: APIDatasService, private authService: AuthService) {
+
   }
 
   ngOnInit() {
@@ -214,7 +213,7 @@ export class GeneralViewComponent implements OnInit {
    *              id : number to filter which contents print by id (used for genus and specie)
    */
   fetchData(type: string, id: number) {
-    const Res = this.api.getDatas('/' + type + '/', this.authService.getToken());
+    const Res = this.api.getDatas('/' + type + '/');
     let array: any[];
 
     if (typeof (Res) !== 'undefined') {

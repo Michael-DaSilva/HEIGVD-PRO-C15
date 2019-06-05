@@ -1,15 +1,17 @@
 import {HttpClient, HttpHeaders} from '@angular/common/http';
 import {Injectable} from '@angular/core';
+import {AuthService} from './auth.service';
 
 @Injectable({
   providedIn: 'root'
 })
 export class APIDatasService {
 
-  constructor(private http: HttpClient) {
+  constructor(private http: HttpClient, private authService: AuthService) {
   }
 
-  getDatas(route, token) {
+  getDatas(route) {
+    const token = this.authService.getToken();
     //HTTP Request headers
     let reqheaders = new HttpHeaders();
     console.log('adding token :' + token);
