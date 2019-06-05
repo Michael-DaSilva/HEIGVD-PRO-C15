@@ -22,7 +22,8 @@ export class GeneralViewComponent implements OnInit {
   @ViewChild('NoContig') noContigChart: BarChartComponent;
   @ViewChild('genusesChart') genChart: InphPieChartComponent;
   @ViewChild('speciesChart') speChart: InphPieChartComponent;
-  dnaContigData: Array<string | number>[];
+  @ViewChild('DNAContig') DNAContigChart: BarChartComponent;
+  contigProteinLengthData: Array<string | number>[];
 
   constructor(private api: APIDatasService, private authService: AuthService) {
   }
@@ -36,6 +37,7 @@ export class GeneralViewComponent implements OnInit {
     // temp values
     this.fetchDNAContigData();
     this.fetchNoContigData();
+    this.fetchContigLength();
   }
 
   fetchNoContigData() {
@@ -123,7 +125,40 @@ export class GeneralViewComponent implements OnInit {
   }
 
   fetchDNAContigData() {
-    this.dnaContigData = [
+    const data = [
+      {
+        name: 'Whole DNA',
+        series: [
+          {
+            name: 'Bacteriums',
+            value: 1275
+          },
+          {
+            name: 'Bacteriophages',
+            value: 867
+          }
+        ]
+      },
+
+      {
+        name: 'Contig',
+        series: [
+          {
+            name: 'Bacteriums',
+            value: 1013
+          },
+          {
+            name: 'Bacteriophages',
+            value: 786
+          }
+        ]
+      }
+    ];
+    this.DNAContigChart.updateGraphDatas(data, '', 'Frequency');
+  }
+
+  fetchContigLength() {
+    this.contigProteinLengthData = [
       ['Contig (average)', 100, 250, 600, 800],
       ['Protein', 90, 150, 400, 600]
     ];
