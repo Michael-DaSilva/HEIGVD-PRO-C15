@@ -31,7 +31,7 @@ export class GeneralViewComponent implements OnInit {
 
   @ViewChild("content") modalContent: any;
 
-  constructor(private api: APIDatasService, private authService: AuthService) {
+  constructor(private api: APIDatasService) {
 
   }
 
