@@ -1,42 +1,57 @@
 <div class="container">
-  <div class="families">
-    <h2 >Families</h2>
-    <app-pie-chart #familiesChart></app-pie-chart>
-    <app-pie-chart #genusesChart></app-pie-chart>
-    <app-pie-chart #speciesChart></app-pie-chart>
-  </div>
-  <div class="interactions">
-    <h2 >Interactions</h2>
-    <app-pie-chart #interactionsChart></app-pie-chart>
-  </div>
-  <div class="contig-prot-length">
-    <h2 >Contig & Protein Lengthes</h2>
-    <div class="col-xs-6">
-      <app-bar-chart #DNAContig></app-bar-chart>
+    <div class="families">
+        <h2>Family</h2>
+        <app-pie-chart #familiesChart></app-pie-chart>
+        <h2>Genus</h2>
+        <app-pie-chart #genusesChart></app-pie-chart>
+        <h2>Specie</h2>
+        <app-pie-chart #speciesChart></app-pie-chart>
     </div>
-    <div class="col-xs-6">
-      <app-bar-chart #NoContig></app-bar-chart>
+    <div class="row">
+        <div class="interactions col-xs-6">
+            <h2>Interactions</h2>
+            <app-pie-chart #interactionsChart></app-pie-chart>
+        </div>
+        <div class="contig-prot-length col-xs-6">
+            <h2>Contig & Protein Lengthes</h2>
+            <app-candlestick-chart [data]="contigProteinLengthData"
+                                   [columnNames]="['Nom', 'Min1', 'Min2', 'Max1', 'Max2']"></app-candlestick-chart>
+
+        </div>
+    </div>
+
+    <div class="contig-prot-length">
+        <h2>DNA / Contig</h2>
+        <div class="col-xs-6">
+            <app-bar-chart #DNAContig></app-bar-chart>
+        </div>
+        <div class="col-xs-6">
+            <app-bar-chart #NoContig></app-bar-chart>
+        </div>
+    </div>
+    <div class="row">
+        <div class="contig-length col-sm-6">
+            <h2>Contig Length</h2>
+            <div class="ct-chart ct-golden-section" id="contig-length-chart">
+                <app-candlestick-chart [data]="contigProteinLengthData"
+                                       [columnNames]="['Nom', 'Min1', 'Min2', 'Max1', 'Max2']"></app-candlestick-chart>
+            </div>
+        </div>
+        <div class="dna-length col-sm-6">
+            <h2>DNA Length</h2>
+            <div class="ct-chart ct-golden-section" id="dna-length-chart"></div>
+        </div>
+    </div>
+  <div class="row">
+    <div class="proteins col-sm-6">
+      <h2>Proteins</h2>
+      <div class="ct-chart ct-golden-section" id="proteins-chart"></div>
+    </div>
+    <div class="gene col-sm-6">
+      <h2>Gene</h2>
+      <div class="ct-chart ct-golden-section" id="gene-chart"></div>
     </div>
   </div>
-  <div class="dna-contig">
-    <h2 >DNA - Contig</h2>
-    <div class="ct-chart ct-golden-section" id="dna-contig-chart"></div>
-  </div>
-  <div class="contig-length">
-    <h2 >Contig Length</h2>
-    <div class="ct-chart ct-golden-section" id="contig-length-chart"></div>
-  </div>
-  <div class="dna-length">
-    <h2 >DNA Length</h2>
-    <div class="ct-chart ct-golden-section" id="dna-length-chart"></div>
-  </div>
-  <div class="proteins">
-    <h2 >Proteins</h2>
-    <div class="ct-chart ct-golden-section" id="proteins-chart"></div>
-  </div>
-  <div class="gene">
-    <h2 >Gene</h2>
-    <div class="ct-chart ct-golden-section" id="gene-chart"></div>
-  </div>
+
 
 </div>
