@@ -6,6 +6,8 @@ import {Couple} from 'src/app/models/couple';
 import {Specie} from '../../models/specie';
 import {InphPieChartComponent} from 'src/app/components/pie-chart/pie-chart.component';
 import {BarChartComponent} from 'src/app/components/bar-chart/bar-chart.component';
+import {NgbModal} from '@ng-bootstrap/ng-bootstrap';
+import {AuthService} from '../../services/auth.service';
 
 
 @Component({
@@ -28,7 +30,10 @@ export class GeneralViewComponent implements OnInit {
   proteinCountData: Array<string | number>[];
   geneCountData: Array<string | number>[];
 
+  @ViewChild('content') modalContent: any;
+
   constructor(private api: APIDatasService) {
+
   }
 
   ngOnInit() {
@@ -232,11 +237,11 @@ export class GeneralViewComponent implements OnInit {
           if (type === 'couple') {
             this.interChart.updateGraphDatas(this.IntercationsToGraphData(array));
           } else if (type === 'family') {
-            this.famChart.updateGraphDatas(this.FamiliesToGraphData(array));
+            this.famChart.updateGraphDatas(this.RegroupDatas(this.FamiliesToGraphData(array), this.famChart));
           } else if (type === 'genus') {
-            this.genChart.updateGraphDatas(this.GenusToGraphData(array, id));
+            this.genChart.updateGraphDatas(this.RegroupDatas(this.GenusToGraphData(array, id), this.genChart));
           } else if (type === 'specie') {
-            this.speChart.updateGraphDatas(this.SpeciesToGraphData(array, id));
+            this.speChart.updateGraphDatas(this.RegroupDatas(this.SpeciesToGraphData(array, id), this.speChart));
           }
         });
     }
@@ -382,21 +387,26 @@ export class GeneralViewComponent implements OnInit {
    *
    * parameters : datas : Array of datas who contains the values to regroup accordingly
    */
-  private RegroupDatas(datas: Array<any>): any[] {
+  private RegroupDatas(datas: Array<any>, target): any[] {
     let others = 0;
-    const result = [];
+
+    let result = [];
+    let tmp = [];
+
     if (datas.length > 4) {
       result.push(datas[0]);
       result.push(datas[1]);
       result.push(datas[2]);
 
-      for (const value of datas) {
-        others += value.value;
+      for (var _i = 3; _i < datas.length; _i++) {
+        others += datas[_i].value;
+        tmp.push(datas[_i]);
       }
       result.push({
         name: 'Others',
-        value: others
+        value: others,
       });
+      target.setAdditionnalDatas('Others', tmp, true);
       return result;
     } else {
       return datas;

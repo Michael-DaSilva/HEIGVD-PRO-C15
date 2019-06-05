@@ -21,6 +21,7 @@ import {AuthGuard} from './services/auth-guard.service';
 import {BarChartComponent} from './components/bar-chart/bar-chart.component';
 import {GoogleChartsModule} from 'angular-google-charts';
 import { CandlestickChartComponent } from './components/candlestick-chart/candlestick-chart.component';
+import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
 
 const appRoutes: Routes = [
   {path: 'login', component: AuthViewComponent},
@@ -53,7 +54,8 @@ const appRoutes: Routes = [
     FormsModule,
     HttpClientModule,
     NgxChartsModule,
-    NgxGraphModule
+    NgxGraphModule,
+    NgbModule
   ],
   providers: [
     AuthService

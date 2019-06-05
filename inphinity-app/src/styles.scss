@@ -97,3 +97,13 @@
   app-bar-chart, app-pie-chart {
     float: left;
 }
+
+.modal.show .modal-dialog {
+  min-width: 50%;
+  max-height: 90%;
+  height: 90%;
+}
+
+.modal-content { max-height: 100%;}
+
+.modal-body { max-height: 90%; height: 90%; overflow-y: scroll;}
