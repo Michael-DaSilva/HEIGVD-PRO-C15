@@ -390,15 +390,15 @@ export class GeneralViewComponent implements OnInit {
   private RegroupDatas(datas: Array<any>, target): any[] {
     let others = 0;
 
-    let result = [];
-    let tmp = [];
+    const result = [];
+    const tmp = [];
 
     if (datas.length > 4) {
       result.push(datas[0]);
       result.push(datas[1]);
       result.push(datas[2]);
 
-      for (var _i = 3; _i < datas.length; _i++) {
+      for (let _i = 3; _i < datas.length; _i++) {
         others += datas[_i].value;
         tmp.push(datas[_i]);
       }

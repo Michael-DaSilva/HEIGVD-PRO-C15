@@ -1,6 +1,6 @@
-import { Component, OnInit, Input,ChangeDetectionStrategy, OnChanges, ViewChild  } from '@angular/core';
-import {NgxChartsModule, PieChartComponent} from "@swimlane/ngx-charts";
-import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import {ChangeDetectionStrategy, Component, Input, OnInit, ViewChild} from '@angular/core';
+import {PieChartComponent} from '@swimlane/ngx-charts';
+import {NgbModal} from '@ng-bootstrap/ng-bootstrap';
 
 @Component({
   selector: 'app-pie-chart',
@@ -45,16 +45,16 @@ import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 export class InphPieChartComponent implements OnInit {
 
   @ViewChild('innerChart') chart: PieChartComponent;
-  @ViewChild("modal") modalContent: any;
+  @ViewChild('modal') modalContent: any;
 
   @Input() data: any[];
-  @Input() onSelectcallback : any;
-  @Input() name : string;
+  @Input() onSelectcallback: any;
+  @Input() name: string;
 
   multi: any[];
-  onClickAdditionDatas: any [] = [];  
+  onClickAdditionDatas: any [] = [];
 
-  view: any[] = [700, 400];
+  view: any[] = [450, 500];
 
   // options
   showLegend = true;
@@ -70,31 +70,32 @@ export class InphPieChartComponent implements OnInit {
 
   constructor( private modalService: NgbModal) {
   }
-  
+
   onSelect(event) {
     console.log(event);
     console.log(event.name);
     console.log(this.onClickAdditionDatas);
-    if(this.onClickAdditionDatas != undefined && this.onClickAdditionDatas[event.name] != undefined){
+    if (this.onClickAdditionDatas !== undefined && this.onClickAdditionDatas[event.name] != undefined) {
       console.log(this.onClickAdditionDatas[event.name]);
-      if (this.onClickAdditionDatas[event.name].popup)
+      if (this.onClickAdditionDatas[event.name].popup) {
           this.modalService.open(this.modalContent);
+      }
     } else {
-      console.log("no additional datas found");
+      console.log('no additional datas found');
     }
   }
   ngOnInit() {
   }
 
-  updateGraphDatas(datas : any[]){
+  updateGraphDatas(datas: any[]) {
     this.data = datas;
     this.chart.update();
   }
 
-  setAdditionnalDatas(id : string, val : any, popup = false){
-    this.onClickAdditionDatas[id] ={
+  setAdditionnalDatas(id: string, val: any, popup = false) {
+    this.onClickAdditionDatas[id] = {
       value : val,
-      popup : popup
+      popup
     };
   }
 }

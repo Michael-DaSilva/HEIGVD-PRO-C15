@@ -22,6 +22,8 @@ import {BarChartComponent} from './components/bar-chart/bar-chart.component';
 import {GoogleChartsModule} from 'angular-google-charts';
 import { CandlestickChartComponent } from './components/candlestick-chart/candlestick-chart.component';
 import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
+import { FlexLayoutModule } from '@angular/flex-layout';
+
 
 const appRoutes: Routes = [
   {path: 'login', component: AuthViewComponent},
@@ -49,6 +51,7 @@ const appRoutes: Routes = [
   imports: [
     BrowserModule,
     BrowserAnimationsModule,
+    FlexLayoutModule,
     RouterModule.forRoot(appRoutes),
     GoogleChartsModule.forRoot(),
     FormsModule,

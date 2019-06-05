@@ -1,20 +1,24 @@
-
-<div class="container">
-  
-    <div class="families">
-        <h2>Family</h2>
-        <app-pie-chart #familiesChart name="Family"></app-pie-chart>
-        <h2>Genus</h2>
-        <app-pie-chart #genusesChart></app-pie-chart>
-        <h2>Specie</h2>
-        <app-pie-chart #speciesChart></app-pie-chart>
+<div fxLayout="column" fxLayoutAlign="center center">
+    <div class="families" fxFlexFill fxLayout="row" fxLayoutAlign="space-evenly">
+        <div fxFlex="30%">
+            <h2>Family</h2>
+            <app-pie-chart #familiesChart name="Family"></app-pie-chart>
+        </div>
+        <div fxFlex="30%">
+            <h2>Genus</h2>
+            <app-pie-chart #genusesChart></app-pie-chart>
+        </div>
+        <div fxFlex="30%">
+            <h2>Specie</h2>
+            <app-pie-chart #speciesChart></app-pie-chart>
+        </div>
     </div>
-    <div class="row">
-        <div class="interactions col-xs-6">
+    <div fxLayout="row" fxFlexFill fxLayoutAlign="space-around">
+        <div class="interactions">
             <h2>Interactions</h2>
             <app-pie-chart #interactionsChart></app-pie-chart>
         </div>
-        <div class="contig-prot-length col-xs-6">
+        <div class="contig-prot-length">
             <h2>Contig & Protein Lengthes</h2>
             <app-candlestick-chart [data]="contigProteinLengthData"
                                    vAxisTitle="Frequency"
@@ -22,25 +26,25 @@
                                    [columnNames]="['Nom', 'Min1', 'Min2', 'Max1', 'Max2']"></app-candlestick-chart>
         </div>
     </div>
-
-    <div class="contig-prot-length">
-        <h2>DNA / Contig</h2>
-        <div class="col-xs-6">
+    <div fxLayout="row" fxFlexFill fxLayoutAlign="space-around">
+        <div>
+            <h2>DNA / Contig</h2>
             <app-bar-chart #DNAContig></app-bar-chart>
         </div>
-        <div class="col-xs-6">
+        <div>
+            <h2>Contig</h2>
             <app-bar-chart #NoContig></app-bar-chart>
         </div>
     </div>
-    <div class="row">
-        <div class="contig-length col-sm-6">
+    <div fxLayout="row" fxFlexFill fxLayoutAlign="space-around">
+        <div class="contig-length">
             <h2>Contig Length</h2>
             <app-candlestick-chart [data]="contigLengthData"
                                    vAxisTitle="Frequency"
                                    hAxisTitle="Contig length"
                                    [columnNames]="['Nom', 'Min1', 'Min2', 'Max1', 'Max2']"></app-candlestick-chart>
         </div>
-        <div class="dna-length col-sm-6">
+        <div class="dna-length">
             <h2>DNA Length</h2>
             <app-candlestick-chart [data]="dnaLengthData"
                                    vAxisTitle="Frequency"
@@ -48,15 +52,15 @@
                                    [columnNames]="['Nom', 'Min1', 'Min2', 'Max1', 'Max2']"></app-candlestick-chart>
         </div>
     </div>
-    <div class="row">
-        <div class="proteins col-sm-6">
+    <div fxLayout="row" fxFlexFill fxLayoutAlign="space-around">
+        <div class="proteins">
             <h2>Proteins</h2>
             <app-candlestick-chart [data]="proteinCountData"
                                    vAxisTitle="Frequency"
                                    hAxisTitle="Proteins count"
                                    [columnNames]="['Nom', 'Min1', 'Min2', 'Max1', 'Max2']"></app-candlestick-chart>
         </div>
-        <div class="gene col-sm-6">
+        <div class="gene">
             <h2>Gene</h2>
             <app-candlestick-chart [data]="geneCountData"
                                    vAxisTitle="Frequency"
@@ -64,6 +68,4 @@
                                    [columnNames]="['Nom', 'Min1', 'Min2', 'Max1', 'Max2']"></app-candlestick-chart>
         </div>
     </div>
-
-
 </div>
