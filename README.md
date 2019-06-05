@@ -33,17 +33,18 @@ Des modules/librairies additionnels sont utilisés dans ce projet:
 
 2. Installez nodejs via [ce lien](https://nodejs.org/en/) (installation par défaut). 
 
-3. Ensuite, installez le module @angular/cli via la commande suivante: `npm install -g @angular/cli`. Cela va installer angular de façon global sur le PC (et donc sera réutilisable par la suite).
+3. Ensuite, installez le module @angular/cli via la commande suivante: `npm install -g @angular/cli`. Cela va installer angular de façon globale sur le PC (et donc sera réutilisable par la suite).
 
 4. Placez-vous dans le répertoire contenant les fichiers angular (ici, inphinity-app). Vous êtes maintenant prêt à lancer l'application web.
 
 ## Run
+1. Effectuer la commande `npm install` pour télécharger toutes les dépendances du projet
 
-1. Lancez la commande `ng serve` dans le répertoire contenant les fichiers angular (ici, inphinity-app).
+2. Lancez la commande `ng serve --host=hôtepublique --port port` dans le répertoire contenant les fichiers angular (ici, inphinity-app).
 
-2. Allez sur `http://localhost:4200/` afin d'accéder au site web.
+3. Allez sur `http://hôtepublique:port/` afin d'accéder au site web.
 
-3. Commencez à utiliser l'application web !
+4. Commencez à utiliser l'application web !
 
 ## Documentation
 
