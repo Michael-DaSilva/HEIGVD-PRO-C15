@@ -3,3 +3,12 @@
     display: block;
     width: 100%;
 }
+
+.modal-backdrop.fade
+   {
+     opacity: 0.5;
+   }
+   .modal-open .modal
+   {
+     opacity: 1;
+   }

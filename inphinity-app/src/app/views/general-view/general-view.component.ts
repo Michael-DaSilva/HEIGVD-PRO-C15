@@ -7,6 +7,7 @@ import {Couple} from 'src/app/models/couple';
 import {Specie} from '../../models/specie';
 import {InphPieChartComponent} from 'src/app/components/pie-chart/pie-chart.component';
 import {BarChartComponent} from 'src/app/components/bar-chart/bar-chart.component';
+import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 
 
 @Component({
@@ -28,6 +29,10 @@ export class GeneralViewComponent implements OnInit {
   dnaLengthData: Array<string | number>[];
   proteinCountData: Array<string | number>[];
   geneCountData: Array<string | number>[];
+
+  @ViewChild("content") modalContent: any;
+
+  testData: any;
 
   constructor(private api: APIDatasService, private authService: AuthService) {
   }
@@ -235,9 +240,9 @@ export class GeneralViewComponent implements OnInit {
           } else if (type === 'family') {
             this.famChart.updateGraphDatas(this.RegroupDatas(this.FamiliesToGraphData(array),this.famChart ));
           } else if (type === 'genus') {
-            this.genChart.updateGraphDatas(this.GenusToGraphData(array, id));
+            this.genChart.updateGraphDatas(this.RegroupDatas(this.GenusToGraphData(array, id), this.genChart));
           } else if (type === 'specie') {
-            this.speChart.updateGraphDatas(this.SpeciesToGraphData(array, id));
+            this.speChart.updateGraphDatas(this.RegroupDatas(this.SpeciesToGraphData(array, id), this.speChart));
           }
         });
     }
@@ -388,7 +393,7 @@ export class GeneralViewComponent implements OnInit {
 
     let result = [];
     let tmp =[];
-    
+
     if (datas.length > 4) {
       result.push(datas[0]);
       result.push(datas[1]);
@@ -402,7 +407,7 @@ export class GeneralViewComponent implements OnInit {
         name: 'Others',
         value: others,
       });
-      target.setAdditionnalDatas('Others', tmp);
+      target.setAdditionnalDatas('Others', tmp, true);
       return result;
     } else {
       return datas;
