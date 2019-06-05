@@ -29,7 +29,7 @@ export class GeneralViewComponent implements OnInit {
   proteinCountData: Array<string | number>[];
   geneCountData: Array<string | number>[];
 
-  constructor(private api: APIDatasService, private authService: AuthService) {
+  constructor(private api: APIDatasService) {
   }
 
   ngOnInit() {
@@ -209,7 +209,7 @@ export class GeneralViewComponent implements OnInit {
    *              id : number to filter which contents print by id (used for genus and specie)
    */
   fetchData(type: string, id: number) {
-    const Res = this.api.getDatas('/' + type + '/', this.authService.getToken());
+    const Res = this.api.getDatas('/' + type + '/');
     let array: any[];
 
     if (typeof (Res) !== 'undefined') {
