@@ -23,6 +23,7 @@ import {GoogleChartsModule} from 'angular-google-charts';
 import { CandlestickChartComponent } from './components/candlestick-chart/candlestick-chart.component';
 import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
 import { FlexLayoutModule } from '@angular/flex-layout';
+import { CoupleComponent } from './components/couple-card/couple.component';
 
 
 const appRoutes: Routes = [
@@ -46,7 +47,8 @@ const appRoutes: Routes = [
     BacteriophageViewComponent,
     InphPieChartComponent,
     BarChartComponent,
-    CandlestickChartComponent
+    CandlestickChartComponent,
+    CoupleComponent
   ],
   imports: [
     BrowserModule,
