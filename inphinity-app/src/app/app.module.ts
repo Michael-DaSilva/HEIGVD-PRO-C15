@@ -13,7 +13,7 @@ import {FormsModule} from '@angular/forms';
 import {HttpClientModule} from '@angular/common/http';
 import {CouplesViewComponent} from './views/couples-view/couples-view.component';
 import {BacteriumViewComponent} from './views/bacterium-view/bacterium-view.component';
-import {BacteriopphageViewComponent} from './views/bacteriopphage-view/bacteriopphage-view.component';
+import {BacteriophageViewComponent} from './views/bacteriophage-view/bacteriophage-view.component';
 import {InphPieChartComponent} from './components/pie-chart/pie-chart.component';
 import {NgxGraphModule} from '@swimlane/ngx-graph';
 import {NgxChartsModule} from '@swimlane/ngx-charts';
@@ -30,7 +30,7 @@ const appRoutes: Routes = [
   {path: 'log-out', component: AuthViewComponent},
   {path: 'couples', component: CouplesViewComponent, canActivate: [AuthGuard]},
   {path: 'bacterium', component: BacteriumViewComponent, canActivate: [AuthGuard]},
-  {path: 'bacteriophage', component: BacteriopphageViewComponent, canActivate: [AuthGuard]},
+  {path: 'bacteriophage', component: BacteriophageViewComponent, canActivate: [AuthGuard]},
   {path: '', component: GeneralViewComponent, canActivate: [AuthGuard]}
 ];
 
@@ -43,7 +43,7 @@ const appRoutes: Routes = [
     LoginFormComponent,
     CouplesViewComponent,
     BacteriumViewComponent,
-    BacteriopphageViewComponent,
+    BacteriophageViewComponent,
     InphPieChartComponent,
     BarChartComponent,
     CandlestickChartComponent

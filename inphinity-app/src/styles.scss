@@ -107,3 +107,37 @@
 .modal-content { max-height: 100%;}
 
 .modal-body { max-height: 90%; height: 90%; overflow-y: scroll;}
+
+@media(min-width : 1280px){
+  .ngx-charts-outer svg{height: 18vw!important;}
+}
+@media(max-width : 1280px){
+  .ngx-charts-outer svg{height: 400px!important;}
+}
+
+.chart-col h2{
+  font-size: 25px;
+}
+.ngx-charts-outer svg > g {width : 100%!important;}
+
+
+ngx-charts-chart, 
+ngx-charts-chart .ngx-charts-outer, 
+ngx-charts-chart .ngx-charts-outer svg, 
+app-pie-chart, app-bar-chart,
+ngx-charts-pie-chart, ngx-charts-bar-vertical-2d{
+  display: flex;
+  width: 100%!important;
+}
+
+ngx-charts-pie-chart ngx-charts-chart .ngx-charts-outer svg {width: 150%!important;}
+app-bar-chart{margin-top : 100px;}
+.chart-legend {
+  display: block;
+  padding: 0;
+  width: auto!important;
+  position: absolute;
+  right: 0;
+  top: 0;
+}
+.chart-legend > div{width : auto!important;}
