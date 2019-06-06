@@ -8,6 +8,7 @@ import {InphPieChartComponent} from 'src/app/components/pie-chart/pie-chart.comp
 import {BarChartComponent} from 'src/app/components/bar-chart/bar-chart.component';
 import {NgbModal} from '@ng-bootstrap/ng-bootstrap';
 import {AuthService} from '../../services/auth.service';
+import {concat, Observable} from 'rxjs';
 
 
 @Component({
@@ -24,14 +25,18 @@ export class GeneralViewComponent implements OnInit {
   @ViewChild('genusesChart') genChart: InphPieChartComponent;
   @ViewChild('speciesChart') speChart: InphPieChartComponent;
   @ViewChild('DNAContig') DNAContigChart: BarChartComponent;
+  familyRawData: Array<Family> = [];
+  genusRawData: Array<Genus> = [];
+  speciesRawData: Array<Specie> = [];
+
   contigProteinLengthData: Array<string | number>[];
   contigLengthData: Array<string | number>[];
   dnaLengthData: Array<string | number>[];
   proteinCountData: Array<string | number>[];
   geneCountData: Array<string | number>[];
 
-  genusSelectedId = 0;
-  specieSelectedId = 0;
+  familySelected = false;
+  genusSelected = false;
 
   @ViewChild('content') modalContent: any;
 
@@ -41,8 +46,6 @@ export class GeneralViewComponent implements OnInit {
 
   ngOnInit() {
     this.fetchData('family', 0);
-    this.fetchData('genus', 0);
-    this.fetchData('specie', 0);
     this.fetchData('couple', 0);
 
     // temp values
@@ -226,10 +229,6 @@ export class GeneralViewComponent implements OnInit {
             array = res as Couple[];
           } else if (type === 'family') {
             array = res as Family[];
-          } else if (type === 'genus') {
-            array = res as Genus[];
-          } else if (type === 'specie') {
-            array = res as Specie[];
           }
         },
         error => {
@@ -240,15 +239,48 @@ export class GeneralViewComponent implements OnInit {
           if (type === 'couple') {
             this.interChart.updateGraphDatas(this.IntercationsToGraphData(array));
           } else if (type === 'family') {
+            this.familyRawData = array;
             this.famChart.updateGraphDatas(this.RegroupDatas(this.FamiliesToGraphData(array), this.famChart));
-          } else if (type === 'genus') {
-            this.genChart.updateGraphDatas(this.RegroupDatas(this.GenusToGraphData(array, id), this.genChart));
-          } else if (type === 'specie') {
-            this.speChart.updateGraphDatas(this.RegroupDatas(this.SpeciesToGraphData(array, id), this.speChart));
           }
         });
     }
 
+  }
+
+  fetchFamilyGenusData(family: Family) {
+    this.genusRawData = [];
+    concat(...family.genuses.map(url => this.api.getDatasRawUrl(url) as Observable<Genus>))
+      .subscribe(g => this.genusRawData.push(g),
+        e => console.error(e),
+        () => {
+          this.genChart.updateGraphDatas(this.RegroupDatas(this.GenusToGraphData(this.genusRawData, 0), this.genChart));
+        }
+      );
+  }
+
+  fetchGenusSpeciesData(genus: Genus) {
+    this.speciesRawData = [];
+    concat(...genus.species.map(url => this.api.getDatasRawUrl(url) as Observable<Specie>))
+      .subscribe(s => this.speciesRawData.push(s),
+        e => console.error(e),
+        () => {
+          this.speChart.updateGraphDatas(this.RegroupDatas(this.SpeciesToGraphData(this.speciesRawData, 0), this.speChart));
+        }
+      );
+  }
+
+  onGenusSelected(name: string) {
+    const genus = this.genusRawData.find(g => g.designation === name);
+    console.log('genus', genus);
+    this.genusSelected = true;
+    this.fetchGenusSpeciesData(genus);
+  }
+
+  onFamilySelected(name: string) {
+    const family = this.familyRawData.find(f => f.designation === name);
+    console.log('family', family);
+    this.familySelected = true;
+    this.fetchFamilyGenusData(family);
   }
 
   /**

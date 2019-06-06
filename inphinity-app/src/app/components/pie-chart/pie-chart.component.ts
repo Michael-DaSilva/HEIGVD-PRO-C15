@@ -7,38 +7,39 @@ import {NgbModal} from '@ng-bootstrap/ng-bootstrap';
   styleUrls: ['./pie-chart.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
   template: `
-    <ng-template #modal let-modal class="pie-modal">
-      <div class="modal-header">
-        <h4 class="modal-title">{{name}}</h4>
-        <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
-          <span aria-hidden="true">&times;</span>
-        </button>
-      </div>
-      <div class="modal-body">
-          <table>
-            <tr *ngFor="let line of onClickAdditionDatas['Others'].value">
-                <td style="width : 60%" >{{line.name}}</td>
-                <td style="width : 30%" >{{line.value}}</td>
-                <td style="width : 10%" ><a href="javascript:void(0)" (click)="onDetails(line.name)"> details</a></td>
-            </tr>
-          </table>
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-light" (click)="modal.close('Close click')">Close</button>
-      </div>
-    </ng-template>
+      <ng-template #modal let-modal class="pie-modal">
+          <div class="modal-header">
+              <h4 class="modal-title">{{name}}</h4>
+              <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+                  <span aria-hidden="true">&times;</span>
+              </button>
+          </div>
+          <div class="modal-body">
+              <table>
+                  <tr *ngFor="let line of onClickAdditionDatas['Others'].value">
+                      <td style="width : 60%">{{line.name}}</td>
+                      <td style="width : 30%">{{line.value}}</td>
+                      <td style="width : 10%"><a href="javascript:void(0)" (click)="modal.close();onSelectCallback(line.name)"> details</a>
+                      </td>
+                  </tr>
+              </table>
+          </div>
+          <div class="modal-footer">
+              <button type="button" class="btn btn-light" (click)="modal.close('Close click')">Close</button>
+          </div>
+      </ng-template>
 
-    <ngx-charts-pie-chart #innerChart
-      [view]="view"
-      [scheme]="colorScheme"
-      [results]="data"
-      [legend]="showLegend"
-      [explodeSlices]="explodeSlices"
-      [labels]="showLabels"
-      [doughnut]="doughnut"
-      [gradient]="gradient"
-      (select)="onSelect($event)">
-    </ngx-charts-pie-chart>
+      <ngx-charts-pie-chart #innerChart
+                            [view]="view"
+                            [scheme]="colorScheme"
+                            [results]="data"
+                            [legend]="showLegend"
+                            [explodeSlices]="explodeSlices"
+                            [labels]="showLabels"
+                            [doughnut]="doughnut"
+                            [gradient]="gradient"
+                            (select)="onSelect($event)">
+      </ngx-charts-pie-chart>
   `
 })
 
@@ -48,8 +49,8 @@ export class InphPieChartComponent implements OnInit {
   @ViewChild('modal') modalContent: any;
 
   @Input() data: any[];
-  @Input() onSelectcallback : any;
-  @Input() name : string;
+  @Input() onSelectCallback: any;
+  @Input() name: string;
   @Input() view: any[];
 
   multi: any[];
@@ -67,22 +68,26 @@ export class InphPieChartComponent implements OnInit {
   explodeSlices = false;
   doughnut = false;
 
-  constructor( private modalService: NgbModal) {
+  constructor(private modalService: NgbModal) {
   }
 
   onSelect(event) {
     console.log(event);
     console.log(event.name);
     console.log(this.onClickAdditionDatas);
-    if (this.onClickAdditionDatas !== undefined && this.onClickAdditionDatas[event.name] != undefined) {
+    if (this.onClickAdditionDatas !== undefined && this.onClickAdditionDatas[event.name] !== undefined) {
       console.log(this.onClickAdditionDatas[event.name]);
       if (this.onClickAdditionDatas[event.name].popup) {
-          this.modalService.open(this.modalContent);
+        this.modalService.open(this.modalContent);
       }
     } else {
       console.log('no additional datas found');
+      if (this.onSelectCallback) {
+        this.onSelectCallback(event.name);
+      }
     }
   }
+
   ngOnInit() {
   }
 
@@ -93,7 +98,7 @@ export class InphPieChartComponent implements OnInit {
 
   setAdditionnalDatas(id: string, val: any, popup = false) {
     this.onClickAdditionDatas[id] = {
-      value : val,
+      value: val,
       popup
     };
   }
