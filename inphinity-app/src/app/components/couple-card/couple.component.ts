@@ -13,6 +13,5 @@ export class CoupleComponent implements OnInit {
   }
 
   ngOnInit() {
-    console.log('data is', this.data);
   }
 }

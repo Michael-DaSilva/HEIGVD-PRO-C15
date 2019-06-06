@@ -10,7 +10,12 @@ export class APIDatasService {
 
   constructor(private http: HttpClient, private authService: AuthService) {
   }
-
+  /**
+   * author : R. Fournier
+   * goal   : Generic function to recover data from the API
+   *
+   * parameters : route: the value to pass to the API in the URL
+   */
   getDatas(route): Observable<any> {
     const token = this.authService.getToken();
     // HTTP Request headers

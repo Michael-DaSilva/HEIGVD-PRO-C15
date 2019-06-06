@@ -47,6 +47,14 @@ export class BarChartComponent implements OnInit {
   ngOnInit() {
   }
 
+  /**
+   * author : R. Fournier
+   * goal   : Create the bar chart with the givin data
+   *
+   * parameters : datas : Array of datas to use in the chart
+   *              xAxisName: name of the x axis in the bar chart
+   *              yAxisName: name of the y axis in the bar chart
+   */
   updateGraphDatas(datas : any, xAxisName ="", yAxisName = ""){
     this.xAxisLabel = xAxisName;
     this.yAxisLabel = yAxisName;

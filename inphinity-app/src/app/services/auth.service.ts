@@ -20,7 +20,12 @@ export class AuthService {
       this.isLoggedIn.next(true);
     }
   }
-
+  /**
+   * author : R. Fournier
+   * goal   : Verifiy if the user is authetificated by recovering the token inside the local storage and that his
+   *          username is valid
+   *
+   */
   isAuth() {
     let bAuth, bToken, bUname: boolean;
     bAuth = this.getAuth() == 'true';
@@ -29,27 +34,54 @@ export class AuthService {
 
     return (bAuth && bToken && bUname);
   }
-
+  /**
+   * author : R. Fournier
+   * goal   : Store a boolean value to know if the user is authentificated
+   *
+   * parameters : a: boolean who say if the user is authentificated
+   */
   setAuth(a: boolean) {
     localStorage.setItem('auth', a.toString());
   }
-
+  /**
+   * author : R. Fournier
+   * goal   : Return the boolean value "auth"
+   *
+   */
   getAuth() {
     return localStorage.getItem('auth');
   }
-
+  /**
+   * author : R. Fournier
+   * goal   : Store the token returned by the API
+   *
+   * parameters : token: the token sent by the API
+   */
   setToken(token) {
     localStorage.setItem('token', token);
   }
-
+  /**
+   * author : R. Fournier
+   * goal   : Return the token stored in the localstorage
+   *
+   */
   getToken(): string {
     return localStorage.getItem('token');
   }
-
+  /**
+   * author : R. Fournier
+   * goal   : Store the username of the user
+   *
+   * parameters : un: string who represent the username
+   */
   storeUsername(un) {
     localStorage.setItem('uname', un);
   }
-
+  /**
+   * author : R. Fournier
+   * goal   : Return the username stored in the localstorage
+   *
+   */
   getUsername() {
     return localStorage.getItem('uname');
   }

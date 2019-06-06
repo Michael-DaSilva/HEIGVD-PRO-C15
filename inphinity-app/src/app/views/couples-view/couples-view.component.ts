@@ -17,6 +17,11 @@ export class CouplesViewComponent implements OnInit {
     this.fetchDataCouple();
   }
 
+  /**
+   * author : M. Da Silva
+   * goal   : Retrieve data from the API (couples)
+   *
+   */
   fetchDataCouple() {
     const Res = this.api.getDatas('/couple/');
     Res.subscribe(
