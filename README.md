@@ -48,8 +48,6 @@ Des modules/librairies additionnels sont utilisés dans ce projet:
 
 ## Documentation
 
-User manual: see file XXXX.
+User manual: see file https://drive.google.com/open?id=1-CjAfkxHJYb66vWc9tLvZewR9xZDWbhw
 
-API documentation: see file YYYYY.
-
-...
+API documentation: see file https://drive.google.com/open?id=1n51fbnResNVuKk_VuXL_u9rIYbMDNAD-
