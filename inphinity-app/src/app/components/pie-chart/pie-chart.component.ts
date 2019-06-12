@@ -19,12 +19,12 @@ import {NgbModal} from '@ng-bootstrap/ng-bootstrap';
             <tr *ngFor="let line of onClickAdditionDatas['Others'].value">
                 <td style="width : 60%" >{{line.name}}</td>
                 <td style="width : 30%" >{{line.value}}</td>
-                <td style="width : 10%" ><a href="javascript:void(0)" (click)="onDetails(line.name)"> details</a></td>
+                <td style="width : 10%" ><a href="javascript:void(0)" (click)="modal.close();OnSelectcallback(line.name)"> details</a></td>
             </tr>
           </table>
       </div>
       <div class="modal-footer">
-        <button type="button" class="btn btn-light" (click)="modal.close('Close click')">Close</button>
+        <button type="button" class="btn btn-light" (click)="modal.close('Close click')">Close</button> 
       </div>
     </ng-template>
 
@@ -51,7 +51,7 @@ export class InphPieChartComponent implements OnInit {
   @ViewChild('modal') modalContent: any;
 
   @Input() data: any[];
-  @Input() onSelectcallback : any;
+  @Input() OnSelectcallback : any;
   @Input() name : string;
   @Input() view: any[];
 
@@ -90,6 +90,9 @@ export class InphPieChartComponent implements OnInit {
       }
     } else {
       console.log('no additional datas found');
+      if (this.OnSelectcallback) {
+        this.OnSelectcallback(event.name);
+      }
     }
   }
   ngOnInit() {

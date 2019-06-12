@@ -3,13 +3,13 @@
     <div class="families row">
         <div class="interactions col-xl-4 chart-col">
             <h2>Family</h2>
-            <app-pie-chart #familiesChart name="Family"></app-pie-chart>
+            <app-pie-chart #familiesChart name="Family" [OnSelectcallback]="onFamilySelected.bind(this)"></app-pie-chart>
         </div>
-        <div class="interactions col-xl-4 chart-col" *ngIf="genusSelectedId">
+        <div class="interactions col-xl-4 chart-col" [style.display]="!familySelected ? 'none' : 'block'">
             <h2>Genus</h2>
-            <app-pie-chart #genusesChart></app-pie-chart>
+            <app-pie-chart #genusesChart [OnSelectcallback]="onGenusSelected.bind(this)"></app-pie-chart>
         </div>
-        <div class="interactions col-xl-4 chart-col" *ngIf="specieSelectedId">
+        <div class="interactions col-xl-4 chart-col" [hidden]="!genusSelected">
             <h2>Specie</h2>
             <app-pie-chart #speciesChart></app-pie-chart>
         </div>
