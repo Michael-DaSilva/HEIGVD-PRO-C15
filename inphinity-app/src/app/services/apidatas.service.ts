@@ -25,7 +25,7 @@ export class APIDatasService {
     reqheaders = reqheaders.append('Accept', '*/*');
     reqheaders = reqheaders.append('Cache-Control', 'no-cache');
 
-    return this.http.get('https://dev.dwimworld.ch:7777/api/?url=http://trex.lan.iict.ch:8080/api' + route, {headers: reqheaders});
+    return this.http.get('https://dev.dwimworld.ch/api/?url=http://trex.lan.iict.ch:8080/api' + route, {headers: reqheaders});
   }
 
   getDatasRawUrl(url: string): Observable<any> {
@@ -37,6 +37,6 @@ export class APIDatasService {
     reqheaders = reqheaders.append('Accept', '*/*');
     reqheaders = reqheaders.append('Cache-Control', 'no-cache');
 
-    return this.http.get('https://dev.dwimworld.ch:7777/api/?url=' + url, {headers: reqheaders});
+    return this.http.get('https://dev.dwimworld.ch/api/?url=' + url, {headers: reqheaders});
   }
 }

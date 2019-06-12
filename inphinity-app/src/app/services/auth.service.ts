@@ -109,7 +109,7 @@ export class AuthService {
               .set('password', userAccesses.password);
 
             this.http
-              .post<any>('https://dev.dwimworld.ch:7777/api/?url=http://trex.lan.iict.ch:8080/api/login/', body)
+              .post<any>('https://dev.dwimworld.ch/api/?url=http://trex.lan.iict.ch:8080/api/login/', body)
               .toPromise()
               .then(
                 res => {
