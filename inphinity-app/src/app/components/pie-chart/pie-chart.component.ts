@@ -39,6 +39,9 @@ import {NgbModal} from '@ng-bootstrap/ng-bootstrap';
       [gradient]="gradient"
       (select)="onSelect($event)">
     </ngx-charts-pie-chart>
+    <div class="loading-anim" *ngIf="this.loading">
+      <img width=100 height = 100 style="position : absolute; left : 50%; top : 25%;" src="assets/infinity-loading.svg" alt=""> 
+    </div>
   `
 })
 
@@ -51,6 +54,12 @@ export class InphPieChartComponent implements OnInit {
   @Input() onSelectcallback : any;
   @Input() name : string;
   @Input() view: any[];
+
+  loading = true;
+
+  forceFinishLoading(){
+    this.loading = false;
+  }
 
   multi: any[];
   onClickAdditionDatas: any [] = [];
@@ -88,6 +97,7 @@ export class InphPieChartComponent implements OnInit {
 
   updateGraphDatas(datas: any[]) {
     this.data = datas;
+    this.forceFinishLoading();
     this.chart.update();
   }
 
