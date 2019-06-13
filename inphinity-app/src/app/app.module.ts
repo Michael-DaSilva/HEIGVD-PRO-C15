@@ -25,6 +25,7 @@ import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { CoupleComponent } from './components/couple-card/couple.component';
 import { ParticlesComponent } from './components/particles/particles.component';
+import { NgGUDCoreModule } from 'ngvforlib/package';
 
 
 const appRoutes: Routes = [
@@ -62,7 +63,8 @@ const appRoutes: Routes = [
     HttpClientModule,
     NgxChartsModule,
     NgxGraphModule,
-    NgbModule
+    NgbModule,
+    NgGUDCoreModule
   ],
   providers: [
     AuthService
