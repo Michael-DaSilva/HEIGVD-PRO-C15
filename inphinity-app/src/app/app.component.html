@@ -1,7 +1,7 @@
 <div id="header" *ngIf="isAuthed" >
     <app-header-menu></app-header-menu>
 </div>
-<app-particles></app-particles>
+<app-particles *ngIf="isAuthed"></app-particles>
 <div id="main-content">
     <router-outlet></router-outlet>
 </div>
