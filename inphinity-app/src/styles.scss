@@ -144,3 +144,20 @@ app-bar-chart{margin-top : 100px;}
 [hidden] {
   display: none !important;
 }
+@media(min-width : 768px){
+  .container {
+    margin-left: 100px;
+    margin-right: 100px;
+  }
+}
+
+.container > div {
+  float: left;
+  width: 100%;
+}
+
+html{  overflow-x: hidden;}
+body, html {
+  width : 100%;
+  max-width: 100%;
+}

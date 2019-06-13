@@ -9,6 +9,7 @@ import {BarChartComponent} from 'src/app/components/bar-chart/bar-chart.componen
 import {NgbModal} from '@ng-bootstrap/ng-bootstrap';
 import {AuthService} from '../../services/auth.service';
 import { concat } from 'rxjs';
+import {Observable} from 'rxjs';
 
 
 @Component({
