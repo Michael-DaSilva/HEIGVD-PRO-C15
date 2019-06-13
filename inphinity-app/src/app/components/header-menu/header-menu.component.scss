@@ -1,0 +1,13 @@
+nav {
+    position: fixed;
+    top: 0;
+    width: 100%;
+    background: #fafafa;
+    z-index: 100000;
+    border-bottom: 5px solid #3A7689;
+}
+:host {
+    width: 100%;
+    height: 130px;
+    display: block;
+}

@@ -6,7 +6,6 @@ import {Couple} from 'src/app/models/couple';
 import {Specie} from '../../models/specie';
 import {InphPieChartComponent} from 'src/app/components/pie-chart/pie-chart.component';
 import {BarChartComponent} from 'src/app/components/bar-chart/bar-chart.component';
-import {Observable} from 'rxjs';
 import {NgbModal} from '@ng-bootstrap/ng-bootstrap';
 import {AuthService} from '../../services/auth.service';
 import { concat } from 'rxjs';

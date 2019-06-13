@@ -24,6 +24,7 @@ import { CandlestickChartComponent } from './components/candlestick-chart/candle
 import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { CoupleComponent } from './components/couple-card/couple.component';
+import { ParticlesComponent } from './components/particles/particles.component';
 
 
 const appRoutes: Routes = [
@@ -48,7 +49,8 @@ const appRoutes: Routes = [
     InphPieChartComponent,
     BarChartComponent,
     CandlestickChartComponent,
-    CoupleComponent
+    CoupleComponent,
+    ParticlesComponent
   ],
   imports: [
     BrowserModule,
