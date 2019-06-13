@@ -14,7 +14,7 @@ export class AuthService {
 
   constructor(private http: HttpClient, private router: Router) {
     //set values by default
-    if (localStorage.getItem('auth') === null || localStorage.getItem('token') === null) {
+    if (!this.isAuth()) {
       this.signOut();
     } else {
       this.isLoggedIn.next(true);
