@@ -30,7 +30,7 @@
     "core-js": "^2.5.4",
     "cors-anywhere": "^0.4.1",
     "d3": "^5.9.2",
-    "jquery": "^3.4.1",
+    "jquery": "^3.5.0",
     "ngvforlib": "0.0.9",
     "popper.js": "^1.15.0",
     "rxjs": "~6.3.3",
